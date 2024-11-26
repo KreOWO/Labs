@@ -152,6 +152,7 @@ namespace Labs {
 	private: System::Windows::Forms::Label^ label23;
 	private: System::Windows::Forms::Button^ btn_12sort;
 	private: System::Windows::Forms::DataGridView^ dg_12start;
+private: System::Windows::Forms::Button^ btn_back;
 
 
 
@@ -253,6 +254,7 @@ namespace Labs {
 			this->label23 = (gcnew System::Windows::Forms::Label());
 			this->btn_12sort = (gcnew System::Windows::Forms::Button());
 			this->dg_12start = (gcnew System::Windows::Forms::DataGridView());
+			this->btn_back = (gcnew System::Windows::Forms::Button());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dg_3start))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dg_3result))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dg_4start))->BeginInit();
@@ -305,7 +307,7 @@ namespace Labs {
 			this->tb_3arraylen->Size = System::Drawing::Size(56, 20);
 			this->tb_3arraylen->TabIndex = 10;
 			this->tb_3arraylen->Text = L"10";
-			this->tb_3arraylen->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &form_lab_3::tb_3arraylen_KeyPress);
+			this->tb_3arraylen->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &form_lab_3::any_arraylen_KeyPress);
 			// 
 			// lbl_arraylen
 			// 
@@ -400,7 +402,7 @@ namespace Labs {
 			this->tb_4arraylen->Size = System::Drawing::Size(56, 20);
 			this->tb_4arraylen->TabIndex = 21;
 			this->tb_4arraylen->Text = L"10";
-			this->tb_4arraylen->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &form_lab_3::tb_4arraylen_KeyPress);
+			this->tb_4arraylen->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &form_lab_3::any_arraylen_KeyPress);
 			// 
 			// label5
 			// 
@@ -498,7 +500,7 @@ namespace Labs {
 			this->tb_7arraylen->Size = System::Drawing::Size(56, 20);
 			this->tb_7arraylen->TabIndex = 30;
 			this->tb_7arraylen->Text = L"10";
-			this->tb_7arraylen->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &form_lab_3::tb_7arraylen_KeyPress);
+			this->tb_7arraylen->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &form_lab_3::any_arraylen_KeyPress);
 			// 
 			// label9
 			// 
@@ -557,7 +559,7 @@ namespace Labs {
 			this->tb_8arraylen->Size = System::Drawing::Size(56, 20);
 			this->tb_8arraylen->TabIndex = 38;
 			this->tb_8arraylen->Text = L"10";
-			this->tb_8arraylen->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &form_lab_3::tb_8arraylen_KeyPress);
+			this->tb_8arraylen->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &form_lab_3::any_arraylen_KeyPress);
 			// 
 			// label12
 			// 
@@ -693,7 +695,7 @@ namespace Labs {
 			this->tb_10arraylen->Size = System::Drawing::Size(56, 20);
 			this->tb_10arraylen->TabIndex = 53;
 			this->tb_10arraylen->Text = L"10";
-			this->tb_10arraylen->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &form_lab_3::tb_10arraylen_KeyPress);
+			this->tb_10arraylen->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &form_lab_3::any_arraylen_KeyPress);
 			// 
 			// label19
 			// 
@@ -718,7 +720,7 @@ namespace Labs {
 			// dg_10start
 			// 
 			this->dg_10start->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
-			this->dg_10start->Location = System::Drawing::Point(21, 571);
+			this->dg_10start->Location = System::Drawing::Point(23, 571);
 			this->dg_10start->Name = L"dg_10start";
 			this->dg_10start->Size = System::Drawing::Size(423, 62);
 			this->dg_10start->TabIndex = 51;
@@ -760,7 +762,7 @@ namespace Labs {
 			this->tb_11arraylen->Size = System::Drawing::Size(56, 20);
 			this->tb_11arraylen->TabIndex = 62;
 			this->tb_11arraylen->Text = L"10";
-			this->tb_11arraylen->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &form_lab_3::tb_11arraylen_KeyPress);
+			this->tb_11arraylen->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &form_lab_3::any_arraylen_KeyPress);
 			// 
 			// label18
 			// 
@@ -827,7 +829,7 @@ namespace Labs {
 			this->tb_13arraylen->Size = System::Drawing::Size(56, 20);
 			this->tb_13arraylen->TabIndex = 76;
 			this->tb_13arraylen->Text = L"10";
-			this->tb_13arraylen->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &form_lab_3::tb_13arraylen_KeyPress);
+			this->tb_13arraylen->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &form_lab_3::any_arraylen_KeyPress);
 			// 
 			// label21
 			// 
@@ -894,7 +896,7 @@ namespace Labs {
 			this->tb_12arraylen->Size = System::Drawing::Size(56, 20);
 			this->tb_12arraylen->TabIndex = 69;
 			this->tb_12arraylen->Text = L"10";
-			this->tb_12arraylen->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &form_lab_3::tb_12arraylen_KeyPress);
+			this->tb_12arraylen->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &form_lab_3::any_arraylen_KeyPress);
 			// 
 			// label23
 			// 
@@ -919,16 +921,27 @@ namespace Labs {
 			// dg_12start
 			// 
 			this->dg_12start->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
-			this->dg_12start->Location = System::Drawing::Point(21, 819);
+			this->dg_12start->Location = System::Drawing::Point(23, 818);
 			this->dg_12start->Name = L"dg_12start";
 			this->dg_12start->Size = System::Drawing::Size(423, 62);
 			this->dg_12start->TabIndex = 67;
+			// 
+			// btn_back
+			// 
+			this->btn_back->Location = System::Drawing::Point(23, 1022);
+			this->btn_back->Name = L"btn_back";
+			this->btn_back->Size = System::Drawing::Size(142, 23);
+			this->btn_back->TabIndex = 80;
+			this->btn_back->Text = L"Вернуться на главную";
+			this->btn_back->UseVisualStyleBackColor = true;
+			this->btn_back->Click += gcnew System::EventHandler(this, &form_lab_3::btn_back_Click);
 			// 
 			// form_lab_3
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(988, 1017);
+			this->ClientSize = System::Drawing::Size(988, 1057);
+			this->Controls->Add(this->btn_back);
 			this->Controls->Add(this->label20);
 			this->Controls->Add(this->dg_13result);
 			this->Controls->Add(this->btn_13generate);
@@ -1019,9 +1032,11 @@ namespace Labs {
 #pragma endregion
 	private: System::Void generate(int arraylen, System::Windows::Forms::DataGridView^ datagrid) {
 		int* array = new int[arraylen];
-		LabsDLL::Class1::RegenerateDataGrid(arraylen, datagrid);
 		LabsDLL::Class1::GenerateArray(array, arraylen, -100, 100);
-		LabsDLL::Class1::FillDataGrid(array, arraylen, datagrid);
+		LabsDLL::Class1::output_mas(array, arraylen, datagrid);
+	}
+	private: System::Void any_arraylen_KeyPress(System::Object^ sender, System::Windows::Forms::KeyPressEventArgs^ e) {
+		if (!((e->KeyChar >= '0') && (e->KeyChar <= '9') || (e->KeyChar == 8))) e->KeyChar = Char(0);
 	}
 	private: System::Void btn_3generate_Click(System::Object^ sender, System::EventArgs^ e) {
 		generate(LabsDLL::Class1::Vvod(tb_3arraylen), dg_3start);
@@ -1032,20 +1047,16 @@ namespace Labs {
 		int element = LabsDLL::Class1::Vvod(tb_3element);
 		int inserdind = LabsDLL::Class1::Vvod(tb_3insertind);
 		int* array = new int[arraylen + 1] {};
-		LabsDLL::Class1::DatagridToArray(array, arraylen, dg_3start);
+		LabsDLL::Class1::input_mas(array, arraylen, dg_3start);
 		for (int i = arraylen; i > inserdind; i--) {
 			array[i] = array[i - 1];
 		}
 		array[inserdind] = element;
-		LabsDLL::Class1::RegenerateDataGrid(arraylen + 1, dg_3result);
-		LabsDLL::Class1::FillDataGrid(array, arraylen + 1, dg_3result);
+		LabsDLL::Class1::output_mas(array, arraylen + 1, dg_3result);
 
 	}
 	private: System::Void tb_3element_KeyPress(System::Object^ sender, System::Windows::Forms::KeyPressEventArgs^ e) {
 		if (!((e->KeyChar >= '0') && (e->KeyChar <= '9') || (e->KeyChar == '-') || (e->KeyChar == 8))) e->KeyChar = Char(0);
-	}
-	private: System::Void tb_3arraylen_KeyPress(System::Object^ sender, System::Windows::Forms::KeyPressEventArgs^ e) {
-		if (!((e->KeyChar >= '0') && (e->KeyChar <= '9') || (e->KeyChar == 8))) e->KeyChar = Char(0);
 	}
 	private: System::Void tb_3insertind_KeyPress(System::Object^ sender, System::Windows::Forms::KeyPressEventArgs^ e) {
 		if (!((e->KeyChar >= '0') && (e->KeyChar <= '9') || (e->KeyChar == 8))) e->KeyChar = Char(0);
@@ -1057,7 +1068,7 @@ namespace Labs {
 	private: System::Void btn_4solve_Click(System::Object^ sender, System::EventArgs^ e) {
 		int arraylen = LabsDLL::Class1::Vvod(tb_4arraylen);
 		int* array = new int[arraylen] {};
-		LabsDLL::Class1::DatagridToArray(array, arraylen, dg_4start);
+		LabsDLL::Class1::input_mas(array, arraylen, dg_4start);
 		bool monot = true;
 		for (int i = 1; i < arraylen; i++) {
 			if (array[i] > array[i - 1]) {
@@ -1074,9 +1085,6 @@ namespace Labs {
 			tb_4answer->BackColor = System::Drawing::Color::Pink;
 		}
 	}
-	private: System::Void tb_4arraylen_KeyPress(System::Object^ sender, System::Windows::Forms::KeyPressEventArgs^ e) {
-		if (!((e->KeyChar >= '0') && (e->KeyChar <= '9') || (e->KeyChar == 8))) e->KeyChar = Char(0);
-	}
 	private: System::Void tb_7generate_Click(System::Object^ sender, System::EventArgs^ e) {
 		generate(LabsDLL::Class1::Vvod(tb_7arraylen), dg_7start);
 		btn_7solve->Enabled = true;
@@ -1084,7 +1092,7 @@ namespace Labs {
 	private: System::Void btn_7solve_Click(System::Object^ sender, System::EventArgs^ e) {
 		int arraylen = LabsDLL::Class1::Vvod(tb_7arraylen);
 		int* array = new int[arraylen] {};
-		LabsDLL::Class1::DatagridToArray(array, arraylen, dg_7start);
+		LabsDLL::Class1::input_mas(array, arraylen, dg_7start);
 		int polval = 0;
 		int polind = -1;
 		for (int i = 0; i < arraylen; i++) {
@@ -1105,9 +1113,6 @@ namespace Labs {
 		}
 
 	}
-	private: System::Void tb_7arraylen_KeyPress(System::Object^ sender, System::Windows::Forms::KeyPressEventArgs^ e) {
-		if (!((e->KeyChar >= '0') && (e->KeyChar <= '9') || (e->KeyChar == 8))) e->KeyChar = Char(0);
-	}
 	private: System::Void btn_8generate_Click(System::Object^ sender, System::EventArgs^ e) {
 		generate(LabsDLL::Class1::Vvod(tb_8arraylen), dg_8start);
 		btn_8solve->Enabled = true;
@@ -1115,7 +1120,7 @@ namespace Labs {
 	private: System::Void btn_8solve_Click(System::Object^ sender, System::EventArgs^ e) {
 		int arraylen = LabsDLL::Class1::Vvod(tb_8arraylen);
 		int* array = new int[arraylen] {};
-		LabsDLL::Class1::DatagridToArray(array, arraylen, dg_8start);
+		LabsDLL::Class1::input_mas(array, arraylen, dg_8start);
 		int chetval = 0;
 		int chetind = -1;
 		for (int i = 0; i < arraylen; i++) {
@@ -1135,9 +1140,6 @@ namespace Labs {
 			tb_8resval->Text = "Неизвестно";
 		}
 	}
-	private: System::Void tb_8arraylen_KeyPress(System::Object^ sender, System::Windows::Forms::KeyPressEventArgs^ e) {
-		if (!((e->KeyChar >= '0') && (e->KeyChar <= '9') || (e->KeyChar == 8))) e->KeyChar = Char(0);
-	}
 	private: System::Void btn_10generate_Click(System::Object^ sender, System::EventArgs^ e) {
 		generate(LabsDLL::Class1::Vvod(tb_10arraylen), dg_10start);
 		btn_10sort->Enabled = true;
@@ -1145,7 +1147,7 @@ namespace Labs {
 	private: System::Void vtn_10sort_Click(System::Object^ sender, System::EventArgs^ e) {
 		int arraylen = LabsDLL::Class1::Vvod(tb_10arraylen);
 		int* array = new int[arraylen] {};
-		LabsDLL::Class1::DatagridToArray(array, arraylen, dg_10start);
+		LabsDLL::Class1::input_mas(array, arraylen, dg_10start);
 		for (int i = 1; i < arraylen; ++i) {
 			int key = array[i];
 			int left = 0;
@@ -1166,11 +1168,7 @@ namespace Labs {
 			}
 			array[left] = key;
 		}
-		LabsDLL::Class1::RegenerateDataGrid(arraylen, dg_10result);
-		LabsDLL::Class1::FillDataGrid(array, arraylen, dg_10result);
-	}
-	private: System::Void tb_10arraylen_KeyPress(System::Object^ sender, System::Windows::Forms::KeyPressEventArgs^ e) {
-		if (!((e->KeyChar >= '0') && (e->KeyChar <= '9') || (e->KeyChar == 8))) e->KeyChar = Char(0);
+		LabsDLL::Class1::output_mas(array, arraylen, dg_10result);
 	}
 	private: System::Void btn_11generate_Click(System::Object^ sender, System::EventArgs^ e) {
 		generate(LabsDLL::Class1::Vvod(tb_11arraylen), dg_11start);
@@ -1179,7 +1177,7 @@ namespace Labs {
 	private: System::Void btn_11sort_Click(System::Object^ sender, System::EventArgs^ e) {
 		int arraylen = LabsDLL::Class1::Vvod(tb_11arraylen);
 		int* array = new int[arraylen] {};
-		LabsDLL::Class1::DatagridToArray(array, arraylen, dg_11start);
+		LabsDLL::Class1::input_mas(array, arraylen, dg_11start);
 
 		for (int i = 0; i < arraylen - 1; ++i) {
 			int minIndex = i;
@@ -1196,11 +1194,7 @@ namespace Labs {
 				array[minIndex] = t;
 			}
 		}
-		LabsDLL::Class1::RegenerateDataGrid(arraylen, dg_11result);
-		LabsDLL::Class1::FillDataGrid(array, arraylen, dg_11result);
-	}
-	private: System::Void tb_11arraylen_KeyPress(System::Object^ sender, System::Windows::Forms::KeyPressEventArgs^ e) {
-		if (!((e->KeyChar >= '0') && (e->KeyChar <= '9') || (e->KeyChar == 8))) e->KeyChar = Char(0);
+		LabsDLL::Class1::output_mas(array, arraylen, dg_11result);
 	}
 	private: System::Void btn_12generate_Click(System::Object^ sender, System::EventArgs^ e) {
 		generate(LabsDLL::Class1::Vvod(tb_12arraylen), dg_12start);
@@ -1209,7 +1203,7 @@ namespace Labs {
 	private: System::Void btn_12sort_Click(System::Object^ sender, System::EventArgs^ e) {
 		int arraylen = LabsDLL::Class1::Vvod(tb_12arraylen);
 		int* array = new int[arraylen] {};
-		LabsDLL::Class1::DatagridToArray(array, arraylen, dg_12start);
+		LabsDLL::Class1::input_mas(array, arraylen, dg_12start);
 
 		for (int i = 0; i < arraylen - 1; ++i) {
 			for (int j = 0; j < arraylen - i - 1; ++j) {
@@ -1221,11 +1215,7 @@ namespace Labs {
 			}
 		}
 
-		LabsDLL::Class1::RegenerateDataGrid(arraylen, dg_12result);
-		LabsDLL::Class1::FillDataGrid(array, arraylen, dg_12result);
-	}
-	private: System::Void tb_12arraylen_KeyPress(System::Object^ sender, System::Windows::Forms::KeyPressEventArgs^ e) {
-		if (!((e->KeyChar >= '0') && (e->KeyChar <= '9') || (e->KeyChar == 8))) e->KeyChar = Char(0);
+		LabsDLL::Class1::output_mas(array, arraylen, dg_12result);
 	}
 	private: System::Void btn_13generate_Click(System::Object^ sender, System::EventArgs^ e) {
 		generate(LabsDLL::Class1::Vvod(tb_13arraylen), dg_13start);
@@ -1234,7 +1224,7 @@ namespace Labs {
 	private: System::Void btn_13sort_Click(System::Object^ sender, System::EventArgs^ e) {
 		int arraylen = LabsDLL::Class1::Vvod(tb_13arraylen);
 		int* array = new int[arraylen] {};
-		LabsDLL::Class1::DatagridToArray(array, arraylen, dg_13start);
+		LabsDLL::Class1::input_mas(array, arraylen, dg_13start);
 
 		bool flag = true;
 
@@ -1253,11 +1243,11 @@ namespace Labs {
 			if (!flag) break;
 		}
 
-		LabsDLL::Class1::RegenerateDataGrid(arraylen, dg_13result);
-		LabsDLL::Class1::FillDataGrid(array, arraylen, dg_13result);
+		LabsDLL::Class1::output_mas(array, arraylen, dg_13result);
 	}
-	private: System::Void tb_13arraylen_KeyPress(System::Object^ sender, System::Windows::Forms::KeyPressEventArgs^ e) {
-		if (!((e->KeyChar >= '0') && (e->KeyChar <= '9') || (e->KeyChar == 8))) e->KeyChar = Char(0);
+	private: System::Void btn_back_Click(System::Object^ sender, System::EventArgs^ e) {
+		Owner->Show();
+		this->Close();
 	}
 };
 }

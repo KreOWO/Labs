@@ -55,11 +55,11 @@ namespace LabsDLL {
             newcol->Name = L"col" + Convert::ToString(i);
             newcol->Width = 20;
             datagrid->Columns->Add(newcol);
-
         }
     }
 
-    void Class1::FillDataGrid(int* array, int arraylen, System::Windows::Forms::DataGridView^ datagrid) {
+    void Class1::output_mas(int* array, int arraylen, System::Windows::Forms::DataGridView^ datagrid) {
+        Class1::RegenerateDataGrid(arraylen, datagrid);
         for (int i = 0; i < arraylen; i++) {
             datagrid->Rows[0]->Cells[i]->Value = array[i];
         }
@@ -71,7 +71,7 @@ namespace LabsDLL {
         }
     }
 
-    void Class1::DatagridToArray(int* array, int arraylen, System::Windows::Forms::DataGridView^ datagrid) {
+    void Class1::input_mas(int* array, int arraylen, System::Windows::Forms::DataGridView^ datagrid) {
         for (int i = 0; i < arraylen; i++) {
             array[i] = Convert::ToInt32(datagrid->Rows[0]->Cells[i]->Value);
         }
