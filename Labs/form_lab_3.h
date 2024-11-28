@@ -466,7 +466,7 @@ private: System::Windows::Forms::Button^ btn_back;
 			this->tb_7resind->Enabled = false;
 			this->tb_7resind->Location = System::Drawing::Point(779, 325);
 			this->tb_7resind->Name = L"tb_7resind";
-			this->tb_7resind->Size = System::Drawing::Size(88, 20);
+			this->tb_7resind->Size = System::Drawing::Size(122, 20);
 			this->tb_7resind->TabIndex = 33;
 			this->tb_7resind->Text = L"Неизвестно";
 			this->tb_7resind->TextAlign = System::Windows::Forms::HorizontalAlignment::Center;
@@ -613,7 +613,7 @@ private: System::Windows::Forms::Button^ btn_back;
 			this->tb_7resval->Enabled = false;
 			this->tb_7resval->Location = System::Drawing::Point(779, 351);
 			this->tb_7resval->Name = L"tb_7resval";
-			this->tb_7resval->Size = System::Drawing::Size(88, 20);
+			this->tb_7resval->Size = System::Drawing::Size(122, 20);
 			this->tb_7resval->TabIndex = 44;
 			this->tb_7resval->Text = L"Неизвестно";
 			this->tb_7resval->TextAlign = System::Windows::Forms::HorizontalAlignment::Center;
@@ -1032,27 +1032,24 @@ private: System::Windows::Forms::Button^ btn_back;
 #pragma endregion
 	private: System::Void generate(int arraylen, System::Windows::Forms::DataGridView^ datagrid) {
 		int* array = new int[arraylen];
-		LabsDLL::Class1::GenerateArray(array, arraylen, -100, 100);
-		LabsDLL::Class1::output_mas(array, arraylen, datagrid);
+		LabsDLL::FunctsForAll::GenerateArray(array, arraylen, -100, 100);
+		LabsDLL::FunctsForAll::output_mas(array, arraylen, datagrid);
 	}
 	private: System::Void any_arraylen_KeyPress(System::Object^ sender, System::Windows::Forms::KeyPressEventArgs^ e) {
 		if (!((e->KeyChar >= '0') && (e->KeyChar <= '9') || (e->KeyChar == 8))) e->KeyChar = Char(0);
 	}
 	private: System::Void btn_3generate_Click(System::Object^ sender, System::EventArgs^ e) {
-		generate(LabsDLL::Class1::Vvod(tb_3arraylen), dg_3start);
+		generate(LabsDLL::FunctsForAll::Vvod(tb_3arraylen), dg_3start);
 		btn_3insert->Enabled = true;
 	}
 	private: System::Void btn_3add_Click(System::Object^ sender, System::EventArgs^ e) {
-		int arraylen = LabsDLL::Class1::Vvod(tb_3arraylen);
-		int element = LabsDLL::Class1::Vvod(tb_3element);
-		int inserdind = LabsDLL::Class1::Vvod(tb_3insertind);
+		int arraylen = LabsDLL::FunctsForAll::Vvod(tb_3arraylen);
+		int element = LabsDLL::FunctsForAll::Vvod(tb_3element);
+		int inserdind = LabsDLL::FunctsForAll::Vvod(tb_3insertind);
 		int* array = new int[arraylen + 1] {};
-		LabsDLL::Class1::input_mas(array, arraylen, dg_3start);
-		for (int i = arraylen; i > inserdind; i--) {
-			array[i] = array[i - 1];
-		}
-		array[inserdind] = element;
-		LabsDLL::Class1::output_mas(array, arraylen + 1, dg_3result);
+		LabsDLL::Lab3Functs::Solve3(array, arraylen, element, inserdind);
+		LabsDLL::FunctsForAll::input_mas(array, arraylen, dg_3start);
+		LabsDLL::FunctsForAll::output_mas(array, arraylen + 1, dg_3result);
 
 	}
 	private: System::Void tb_3element_KeyPress(System::Object^ sender, System::Windows::Forms::KeyPressEventArgs^ e) {
@@ -1062,20 +1059,14 @@ private: System::Windows::Forms::Button^ btn_back;
 		if (!((e->KeyChar >= '0') && (e->KeyChar <= '9') || (e->KeyChar == 8))) e->KeyChar = Char(0);
 	}
 	private: System::Void btn_4generate_Click(System::Object^ sender, System::EventArgs^ e) {
-		generate(LabsDLL::Class1::Vvod(tb_4arraylen), dg_4start);
+		generate(LabsDLL::FunctsForAll::Vvod(tb_4arraylen), dg_4start);
 		btn_4solve->Enabled = true;
 	}
 	private: System::Void btn_4solve_Click(System::Object^ sender, System::EventArgs^ e) {
-		int arraylen = LabsDLL::Class1::Vvod(tb_4arraylen);
+		int arraylen = LabsDLL::FunctsForAll::Vvod(tb_4arraylen);
 		int* array = new int[arraylen] {};
-		LabsDLL::Class1::input_mas(array, arraylen, dg_4start);
-		bool monot = true;
-		for (int i = 1; i < arraylen; i++) {
-			if (array[i] > array[i - 1]) {
-				monot = false;
-				break;
-			}
-		}
+		LabsDLL::FunctsForAll::input_mas(array, arraylen, dg_4start);
+		bool monot = LabsDLL::Lab3Functs::Solve4(array, arraylen);
 		if (monot) {
 			tb_4answer->Text = "Массив монотонен";
 			tb_4answer->BackColor = System::Drawing::Color::PaleGreen;
@@ -1086,164 +1077,91 @@ private: System::Windows::Forms::Button^ btn_back;
 		}
 	}
 	private: System::Void tb_7generate_Click(System::Object^ sender, System::EventArgs^ e) {
-		generate(LabsDLL::Class1::Vvod(tb_7arraylen), dg_7start);
+		generate(LabsDLL::FunctsForAll::Vvod(tb_7arraylen), dg_7start);
 		btn_7solve->Enabled = true;
 	}
 	private: System::Void btn_7solve_Click(System::Object^ sender, System::EventArgs^ e) {
-		int arraylen = LabsDLL::Class1::Vvod(tb_7arraylen);
+		int arraylen = LabsDLL::FunctsForAll::Vvod(tb_7arraylen);
 		int* array = new int[arraylen] {};
-		LabsDLL::Class1::input_mas(array, arraylen, dg_7start);
+		LabsDLL::FunctsForAll::input_mas(array, arraylen, dg_7start);
 		int polval = 0;
 		int polind = -1;
-		for (int i = 0; i < arraylen; i++) {
-			if (array[i] > 0) {
-				polind = i;
-				polval = array[i];
-				break;
-			}
-		}
+		LabsDLL::Lab3Functs::Solve7(array, arraylen, &polind, &polval);
 
 		if (polind != -1) {
-			LabsDLL::Class1::Vivod(polind, tb_7resind);
-			LabsDLL::Class1::Vivod(polval, tb_7resval);
+			LabsDLL::FunctsForAll::Vivod(polind, tb_7resind);
+			LabsDLL::FunctsForAll::Vivod(polval, tb_7resval);
 		}
 		else {
-			tb_7resind->Text = "Неизвестно";
-			tb_7resval->Text = "Неизвестно";
+			tb_7resind->Text = "Нет положительных";
+			tb_7resval->Text = "Нет положительных";
 		}
 
 	}
 	private: System::Void btn_8generate_Click(System::Object^ sender, System::EventArgs^ e) {
-		generate(LabsDLL::Class1::Vvod(tb_8arraylen), dg_8start);
+		generate(LabsDLL::FunctsForAll::Vvod(tb_8arraylen), dg_8start);
 		btn_8solve->Enabled = true;
 	}
 	private: System::Void btn_8solve_Click(System::Object^ sender, System::EventArgs^ e) {
-		int arraylen = LabsDLL::Class1::Vvod(tb_8arraylen);
+		int arraylen = LabsDLL::FunctsForAll::Vvod(tb_8arraylen);
 		int* array = new int[arraylen] {};
-		LabsDLL::Class1::input_mas(array, arraylen, dg_8start);
+		LabsDLL::FunctsForAll::input_mas(array, arraylen, dg_8start);
 		int chetval = 0;
 		int chetind = -1;
-		for (int i = 0; i < arraylen; i++) {
-			if (array[i] % 2 == 0) {
-				chetind = i;
-				chetval = array[i];
-				break;
-			}
-		}
+		LabsDLL::Lab3Functs::Solve8(array, arraylen, &chetval, &chetind);
 
 		if (chetind != -1) {
-			LabsDLL::Class1::Vivod(chetind, tb_8resind);
-			LabsDLL::Class1::Vivod(chetval, tb_8resval);
+			LabsDLL::FunctsForAll::Vivod(chetind, tb_8resind);
+			LabsDLL::FunctsForAll::Vivod(chetval, tb_8resval);
 		}
 		else {
-			tb_8resind->Text = "Неизвестно";
-			tb_8resval->Text = "Неизвестно";
+			tb_8resind->Text = "Нет четных";
+			tb_8resval->Text = "Нет четных";
 		}
 	}
 	private: System::Void btn_10generate_Click(System::Object^ sender, System::EventArgs^ e) {
-		generate(LabsDLL::Class1::Vvod(tb_10arraylen), dg_10start);
+		generate(LabsDLL::FunctsForAll::Vvod(tb_10arraylen), dg_10start);
 		btn_10sort->Enabled = true;
 	}
 	private: System::Void vtn_10sort_Click(System::Object^ sender, System::EventArgs^ e) {
-		int arraylen = LabsDLL::Class1::Vvod(tb_10arraylen);
+		int arraylen = LabsDLL::FunctsForAll::Vvod(tb_10arraylen);
 		int* array = new int[arraylen] {};
-		LabsDLL::Class1::input_mas(array, arraylen, dg_10start);
-		for (int i = 1; i < arraylen; ++i) {
-			int key = array[i];
-			int left = 0;
-			int right = i - 1;
-
-			while (left <= right) {
-				int mid = left + (right - left) / 2;
-				if (array[mid] > key) {
-					right = mid - 1;
-				}
-				else {
-					left = mid + 1;
-				}
-			}
-
-			for (int j = i - 1; j >= left; --j) {
-				array[j + 1] = array[j];
-			}
-			array[left] = key;
-		}
-		LabsDLL::Class1::output_mas(array, arraylen, dg_10result);
+		LabsDLL::FunctsForAll::input_mas(array, arraylen, dg_10start);
+		LabsDLL::Lab3Functs::Solve10(array, arraylen);
+		LabsDLL::FunctsForAll::output_mas(array, arraylen, dg_10result);
 	}
 	private: System::Void btn_11generate_Click(System::Object^ sender, System::EventArgs^ e) {
-		generate(LabsDLL::Class1::Vvod(tb_11arraylen), dg_11start);
+		generate(LabsDLL::FunctsForAll::Vvod(tb_11arraylen), dg_11start);
 		btn_11sort->Enabled = true;
 	}
 	private: System::Void btn_11sort_Click(System::Object^ sender, System::EventArgs^ e) {
-		int arraylen = LabsDLL::Class1::Vvod(tb_11arraylen);
+		int arraylen = LabsDLL::FunctsForAll::Vvod(tb_11arraylen);
 		int* array = new int[arraylen] {};
-		LabsDLL::Class1::input_mas(array, arraylen, dg_11start);
-
-		for (int i = 0; i < arraylen - 1; ++i) {
-			int minIndex = i;
-
-			for (int j = i + 1; j < arraylen; ++j) {
-				if (array[j] < array[minIndex]) {
-					minIndex = j;
-				}
-			}
-
-			if (minIndex != i) {
-				int t = array[i];
-				array[i] = array[minIndex];
-				array[minIndex] = t;
-			}
-		}
-		LabsDLL::Class1::output_mas(array, arraylen, dg_11result);
+		LabsDLL::FunctsForAll::input_mas(array, arraylen, dg_11start);
+		LabsDLL::Lab3Functs::Solve11(array, arraylen);
+		LabsDLL::FunctsForAll::output_mas(array, arraylen, dg_11result);
 	}
 	private: System::Void btn_12generate_Click(System::Object^ sender, System::EventArgs^ e) {
-		generate(LabsDLL::Class1::Vvod(tb_12arraylen), dg_12start);
+		generate(LabsDLL::FunctsForAll::Vvod(tb_12arraylen), dg_12start);
 		btn_12sort->Enabled = true;
 	}
 	private: System::Void btn_12sort_Click(System::Object^ sender, System::EventArgs^ e) {
-		int arraylen = LabsDLL::Class1::Vvod(tb_12arraylen);
+		int arraylen = LabsDLL::FunctsForAll::Vvod(tb_12arraylen);
 		int* array = new int[arraylen] {};
-		LabsDLL::Class1::input_mas(array, arraylen, dg_12start);
-
-		for (int i = 0; i < arraylen - 1; ++i) {
-			for (int j = 0; j < arraylen - i - 1; ++j) {
-				if (array[j] > array[j + 1]) {
-					int t = array[j];
-					array[j] = array[j + 1];
-					array[j + 1] = t;
-				}
-			}
-		}
-
-		LabsDLL::Class1::output_mas(array, arraylen, dg_12result);
+		LabsDLL::FunctsForAll::input_mas(array, arraylen, dg_12start);
+		LabsDLL::Lab3Functs::Solve12(array, arraylen);
+		LabsDLL::FunctsForAll::output_mas(array, arraylen, dg_12result);
 	}
 	private: System::Void btn_13generate_Click(System::Object^ sender, System::EventArgs^ e) {
-		generate(LabsDLL::Class1::Vvod(tb_13arraylen), dg_13start);
+		generate(LabsDLL::FunctsForAll::Vvod(tb_13arraylen), dg_13start);
 		btn_13sort->Enabled = true;
 	}
 	private: System::Void btn_13sort_Click(System::Object^ sender, System::EventArgs^ e) {
-		int arraylen = LabsDLL::Class1::Vvod(tb_13arraylen);
+		int arraylen = LabsDLL::FunctsForAll::Vvod(tb_13arraylen);
 		int* array = new int[arraylen] {};
-		LabsDLL::Class1::input_mas(array, arraylen, dg_13start);
-
-		bool flag = true;
-
-		for (int i = 0; i < arraylen - 1 && flag; ++i) {
-			flag = false;
-
-			for (int j = 0; j < arraylen - i - 1; ++j) {
-				if (array[j] > array[j + 1]) {
-					int t = array[j];
-					array[j] = array[j + 1];
-					array[j + 1] = t;
-					flag = true;
-				}
-			}
-
-			if (!flag) break;
-		}
-
-		LabsDLL::Class1::output_mas(array, arraylen, dg_13result);
+		LabsDLL::FunctsForAll::input_mas(array, arraylen, dg_13start);
+		LabsDLL::Lab3Functs::Solve13(array, arraylen);
+		LabsDLL::FunctsForAll::output_mas(array, arraylen, dg_13result);
 	}
 	private: System::Void btn_back_Click(System::Object^ sender, System::EventArgs^ e) {
 		Owner->Show();

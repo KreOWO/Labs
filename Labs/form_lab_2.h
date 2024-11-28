@@ -71,8 +71,8 @@ namespace Labs {
 	private: System::Windows::Forms::TextBox^ tb_resind;
 
 	private: System::Windows::Forms::Label^ label1;
-	private: System::Windows::Forms::TextBox^ tb_resval;
-	private: System::Windows::Forms::Label^ label2;
+
+
 
 
 
@@ -108,8 +108,6 @@ namespace Labs {
 			this->tb_maxvalue = (gcnew System::Windows::Forms::TextBox());
 			this->tb_resind = (gcnew System::Windows::Forms::TextBox());
 			this->label1 = (gcnew System::Windows::Forms::Label());
-			this->tb_resval = (gcnew System::Windows::Forms::TextBox());
-			this->label2 = (gcnew System::Windows::Forms::Label());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->bp_task))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dg_start))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dg_result))->BeginInit();
@@ -117,7 +115,7 @@ namespace Labs {
 			// 
 			// btn_back
 			// 
-			this->btn_back->Location = System::Drawing::Point(12, 506);
+			this->btn_back->Location = System::Drawing::Point(12, 477);
 			this->btn_back->Name = L"btn_back";
 			this->btn_back->Size = System::Drawing::Size(142, 23);
 			this->btn_back->TabIndex = 0;
@@ -221,7 +219,7 @@ namespace Labs {
 			// dg_result
 			// 
 			this->dg_result->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
-			this->dg_result->Location = System::Drawing::Point(12, 428);
+			this->dg_result->Location = System::Drawing::Point(12, 409);
 			this->dg_result->Name = L"dg_result";
 			this->dg_result->Size = System::Drawing::Size(512, 62);
 			this->dg_result->TabIndex = 16;
@@ -261,30 +259,11 @@ namespace Labs {
 			this->label1->TabIndex = 17;
 			this->label1->Text = L"Индекс максимального четного элемента";
 			// 
-			// tb_resval
-			// 
-			this->tb_resval->Enabled = false;
-			this->tb_resval->Location = System::Drawing::Point(253, 405);
-			this->tb_resval->Name = L"tb_resval";
-			this->tb_resval->Size = System::Drawing::Size(56, 20);
-			this->tb_resval->TabIndex = 20;
-			// 
-			// label2
-			// 
-			this->label2->AutoSize = true;
-			this->label2->Location = System::Drawing::Point(14, 408);
-			this->label2->Name = L"label2";
-			this->label2->Size = System::Drawing::Size(233, 13);
-			this->label2->TabIndex = 19;
-			this->label2->Text = L"Значение максимального четного элемента";
-			// 
 			// form_lab_2
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(539, 541);
-			this->Controls->Add(this->tb_resval);
-			this->Controls->Add(this->label2);
+			this->ClientSize = System::Drawing::Size(539, 511);
 			this->Controls->Add(this->tb_resind);
 			this->Controls->Add(this->label1);
 			this->Controls->Add(this->dg_result);
@@ -314,47 +293,27 @@ namespace Labs {
 	private: System::Void btn_back_Click(System::Object^ sender, System::EventArgs^ e) {
 		Owner->Show();
 		this->Close();
-	}/*
-	private: System::Void form_lab_2_FormClosing(System::Object^ sender, System::Windows::Forms::FormClosingEventArgs^ e) {
-		Application::Exit();
-	}*/
+	}
 	private: System::Void btn_generate_Click(System::Object^ sender, System::EventArgs^ e) {
 		int arraylen, minvalue, maxvalue;
-		arraylen = LabsDLL::Class1::Vvod(tb_arraylen);
-		minvalue = LabsDLL::Class1::Vvod(tb_minvalue);
-		maxvalue = LabsDLL::Class1::Vvod(tb_maxvalue);
+		arraylen = LabsDLL::FunctsForAll::Vvod(tb_arraylen);
+		minvalue = LabsDLL::FunctsForAll::Vvod(tb_minvalue);
+		maxvalue = LabsDLL::FunctsForAll::Vvod(tb_maxvalue);
 		int* array = new int[arraylen];
-		LabsDLL::Class1::GenerateArray(array, arraylen, minvalue, maxvalue);
-		LabsDLL::Class1::output_mas(array, arraylen, dg_start);
+		LabsDLL::FunctsForAll::GenerateArray(array, arraylen, minvalue, maxvalue);
+		LabsDLL::FunctsForAll::output_mas(array, arraylen, dg_start);
 
 	}
 	private: System::Void btn_solve_Click(System::Object^ sender, System::EventArgs^ e) {
-		int arraylen = LabsDLL::Class1::Vvod(tb_arraylen);
+		int arraylen = LabsDLL::FunctsForAll::Vvod(tb_arraylen);
 		int* array = new int[arraylen]{};
-		LabsDLL::Class1::input_mas(array, arraylen, dg_start);
-
-		int maxchet = LabsDLL::Class1::Vvod(tb_minvalue);
-		int maxchetind = 0;
-		for (int i = 0; i < arraylen; i++) {
-			if (array[i] % 2 == 0 && array[i] > maxchet) {
-				maxchet = array[i];
-				maxchetind = i;
-			}
-		}
-
-		int* resarray = new int[arraylen] {};
-		int newval = 0;
-		for (int i = 0; i < arraylen; i++) {
-			if (array[i] < maxchetind) {
-				resarray[newval] = i;
-				newval++;
-			}
-		}
-
-		LabsDLL::Class1::Vivod(maxchetind, tb_resind);
-		LabsDLL::Class1::Vivod(maxchet, tb_resval);
-
-		LabsDLL::Class1::output_mas(resarray, newval, dg_result);
+		LabsDLL::FunctsForAll::input_mas(array, arraylen, dg_start);
+		int maxchetind = LabsDLL::Lab2Functs::SearchMaxChetInd(array, arraylen);
+		int resarraylen = LabsDLL::Lab2Functs::SearchNewArrayLen(array, arraylen, maxchetind);
+		int* resarray = new int[resarraylen] {};
+		LabsDLL::Lab2Functs::FillNewArray(array, arraylen, maxchetind, resarray);
+		LabsDLL::FunctsForAll::Vivod(maxchetind, tb_resind);
+		LabsDLL::FunctsForAll::output_mas(resarray, resarraylen, dg_result);
 	}
 	private: System::Void tb_arraylen_KeyPress(System::Object^ sender, System::Windows::Forms::KeyPressEventArgs^ e) {
 		if (!((e->KeyChar >= '0') && (e->KeyChar <= '9') || (e->KeyChar == 8))) e->KeyChar = Char(0);

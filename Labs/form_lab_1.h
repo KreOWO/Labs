@@ -47,11 +47,13 @@ namespace Labs {
 	private: System::Windows::Forms::Label^ lbl_x;
 	private: System::Windows::Forms::Label^ lbl_z;
 	private: System::Windows::Forms::Label^ lbl_w;
-	private: System::Windows::Forms::Label^ lbl_z_answer;
-	private: System::Windows::Forms::Label^ lbl_w_answer;
+
+
 	private: System::Windows::Forms::PictureBox^ pb_task;
 
 	private: System::Windows::Forms::TextBox^ tb_all_results;
+	private: System::Windows::Forms::TextBox^ tb_z;
+	private: System::Windows::Forms::TextBox^ tb_w;
 
 
 
@@ -93,10 +95,10 @@ namespace Labs {
 			this->lbl_x = (gcnew System::Windows::Forms::Label());
 			this->lbl_z = (gcnew System::Windows::Forms::Label());
 			this->lbl_w = (gcnew System::Windows::Forms::Label());
-			this->lbl_z_answer = (gcnew System::Windows::Forms::Label());
-			this->lbl_w_answer = (gcnew System::Windows::Forms::Label());
 			this->pb_task = (gcnew System::Windows::Forms::PictureBox());
 			this->tb_all_results = (gcnew System::Windows::Forms::TextBox());
+			this->tb_z = (gcnew System::Windows::Forms::TextBox());
+			this->tb_w = (gcnew System::Windows::Forms::TextBox());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pb_task))->BeginInit();
 			this->SuspendLayout();
 			// 
@@ -145,7 +147,7 @@ namespace Labs {
 			this->tb_a->Size = System::Drawing::Size(84, 20);
 			this->tb_a->TabIndex = 4;
 			this->tb_a->Text = L"0,5";
-			this->tb_a->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &form_lab_1::tb_a_KeyPress);
+			this->tb_a->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &form_lab_1::any_tb_KeyPress);
 			// 
 			// tb_b
 			// 
@@ -154,7 +156,7 @@ namespace Labs {
 			this->tb_b->Size = System::Drawing::Size(84, 20);
 			this->tb_b->TabIndex = 6;
 			this->tb_b->Text = L"3,1";
-			this->tb_b->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &form_lab_1::tb_b_KeyPress);
+			this->tb_b->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &form_lab_1::any_tb_KeyPress);
 			// 
 			// lbl_b
 			// 
@@ -172,7 +174,7 @@ namespace Labs {
 			this->tb_x->Size = System::Drawing::Size(84, 20);
 			this->tb_x->TabIndex = 8;
 			this->tb_x->Text = L"1,414";
-			this->tb_x->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &form_lab_1::tb_x_KeyPress);
+			this->tb_x->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &form_lab_1::any_tb_KeyPress);
 			// 
 			// lbl_x
 			// 
@@ -201,22 +203,6 @@ namespace Labs {
 			this->lbl_w->TabIndex = 10;
 			this->lbl_w->Text = L"w =";
 			// 
-			// lbl_z_answer
-			// 
-			this->lbl_z_answer->AutoSize = true;
-			this->lbl_z_answer->Location = System::Drawing::Point(52, 201);
-			this->lbl_z_answer->Name = L"lbl_z_answer";
-			this->lbl_z_answer->Size = System::Drawing::Size(0, 13);
-			this->lbl_z_answer->TabIndex = 11;
-			// 
-			// lbl_w_answer
-			// 
-			this->lbl_w_answer->AutoSize = true;
-			this->lbl_w_answer->Location = System::Drawing::Point(55, 233);
-			this->lbl_w_answer->Name = L"lbl_w_answer";
-			this->lbl_w_answer->Size = System::Drawing::Size(0, 13);
-			this->lbl_w_answer->TabIndex = 12;
-			// 
 			// pb_task
 			// 
 			this->pb_task->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"pb_task.Image")));
@@ -238,15 +224,31 @@ namespace Labs {
 			this->tb_all_results->TabIndex = 14;
 			this->tb_all_results->WordWrap = false;
 			// 
+			// tb_z
+			// 
+			this->tb_z->Enabled = false;
+			this->tb_z->Location = System::Drawing::Point(55, 198);
+			this->tb_z->Name = L"tb_z";
+			this->tb_z->Size = System::Drawing::Size(106, 20);
+			this->tb_z->TabIndex = 15;
+			// 
+			// tb_w
+			// 
+			this->tb_w->Enabled = false;
+			this->tb_w->Location = System::Drawing::Point(55, 230);
+			this->tb_w->Name = L"tb_w";
+			this->tb_w->Size = System::Drawing::Size(106, 20);
+			this->tb_w->TabIndex = 16;
+			// 
 			// form_lab_1
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(564, 343);
+			this->Controls->Add(this->tb_w);
+			this->Controls->Add(this->tb_z);
 			this->Controls->Add(this->tb_all_results);
 			this->Controls->Add(this->pb_task);
-			this->Controls->Add(this->lbl_w_answer);
-			this->Controls->Add(this->lbl_z_answer);
 			this->Controls->Add(this->lbl_w);
 			this->Controls->Add(this->lbl_z);
 			this->Controls->Add(this->tb_x);
@@ -261,7 +263,6 @@ namespace Labs {
 			this->Name = L"form_lab_1";
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 			this->Text = L"Лабораторная работа 1";
-			//this->FormClosing += gcnew System::Windows::Forms::FormClosingEventHandler(this, &form_lab_1::form_lab_1_FormClosing);
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pb_task))->EndInit();
 			this->ResumeLayout(false);
 			this->PerformLayout();
@@ -279,17 +280,17 @@ namespace Labs {
 			//a = Convert::ToDouble(tb_a->Text->Replace('.', ','));
 			//b = Convert::ToDouble(tb_b->Text->Replace('.', ','));
 			//x = Convert::ToDouble(tb_x->Text->Replace('.', ','));
-			a = LabsDLL::Class1::Vvod(tb_a);
-			b = LabsDLL::Class1::Vvod(tb_b);
-			x = LabsDLL::Class1::Vvod(tb_x);
+			a = LabsDLL::FunctsForAll::Vvod(tb_a);
+			b = LabsDLL::FunctsForAll::Vvod(tb_b);
+			x = LabsDLL::FunctsForAll::Vvod(tb_x);
 			//double z = sqrt(a * x * sin(2 * x) + exp(-2 * x) * (x + b));
 			//double w = pow(cos(pow(x, 3)), 2) - x / sqrt(pow(a, 2) + pow(b, 2));
 			//Вывод данных
 			z = 0;
 			w = 0;
-			LabsDLL::Class1::Solve12(&z, &w, a, b, x);
-			LabsDLL::Class1::Vivod(z, lbl_z_answer);
-			LabsDLL::Class1::Vivod(w, lbl_w_answer);
+			LabsDLL::Lab1Functs::Solve12(&z, &w, a, b, x);
+			LabsDLL::FunctsForAll::Vivod(z, tb_z);
+			LabsDLL::FunctsForAll::Vivod(w, tb_w);
 			//lbl_z_answer->Text = Convert::ToString(z);
 			//lbl_w_answer->Text = Convert::ToString(w);
 
@@ -313,17 +314,8 @@ namespace Labs {
 			MessageBox::Show("Ошибка при вводе данных. Введите число!", "Сообщение", MessageBoxButtons::OK, MessageBoxIcon::Error);
 		}
 	}
-	private: System::Void tb_a_KeyPress(System::Object^ sender, System::Windows::Forms::KeyPressEventArgs^ e) {
+	private: System::Void any_tb_KeyPress(System::Object^ sender, System::Windows::Forms::KeyPressEventArgs^ e) {
 		if (!((e->KeyChar >= '0') && (e->KeyChar <= '9') || (e->KeyChar == ',') || (e->KeyChar == '.') || (e->KeyChar == '-') || (e->KeyChar == 8))) e->KeyChar = Char(0);
 	}
-	private: System::Void tb_b_KeyPress(System::Object^ sender, System::Windows::Forms::KeyPressEventArgs^ e) {
-		if (!((e->KeyChar >= '0') && (e->KeyChar <= '9') || (e->KeyChar == ',') || (e->KeyChar == '.') || (e->KeyChar == '-') || (e->KeyChar == 8))) e->KeyChar = Char(0);
-	}
-	private: System::Void tb_x_KeyPress(System::Object^ sender, System::Windows::Forms::KeyPressEventArgs^ e) {
-		if (!((e->KeyChar >= '0') && (e->KeyChar <= '9') || (e->KeyChar == ',') || (e->KeyChar == '.') || (e->KeyChar == '-') || (e->KeyChar == 8))) e->KeyChar = Char(0);
-	}/*
-	private: System::Void form_lab_1_FormClosing(System::Object^ sender, System::Windows::Forms::FormClosingEventArgs^ e) {
-		Application::Exit();
-	}*/
 	};
 }

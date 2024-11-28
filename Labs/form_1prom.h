@@ -182,25 +182,18 @@ namespace Labs {
 
 		}
 #pragma endregion
-	private: double Sh(double x) {
-		return (exp(x) - exp(-x)) / 2;
-	}
-
 	private: System::Void btn_back_Click(System::Object^ sender, System::EventArgs^ e) {
 		Owner->Show();
 		this->Close();
 	}
 	private: System::Void btn_solve_Click(System::Object^ sender, System::EventArgs^ e) {
 		double x, y;
-		x = LabsDLL::Class1::Vvod(tb_x);
-		y = Sh(x) + tan(x + 1) - pow(tan(2 + Sh(x - 1)), 2);
-		LabsDLL::Class1::Vivod(y, tb_y);
+		x = LabsDLL::FunctsForAll::Vvod(tb_x);
+		y = LabsDLL::PoshDetFuncts::Solve(x);
+		LabsDLL::FunctsForAll::Vivod(y, tb_y);
 	}
 	private: System::Void tb_x_KeyPress(System::Object^ sender, System::Windows::Forms::KeyPressEventArgs^ e) {
 		if (!((e->KeyChar >= '0') && (e->KeyChar <= '9') || (e->KeyChar == ',') || (e->KeyChar == '.') || (e->KeyChar == '-') || (e->KeyChar == 8))) e->KeyChar = Char(0);
 	}
-	/*private: System::Void form_1prom_FormClosing(System::Object^ sender, System::Windows::Forms::FormClosingEventArgs^ e) {
-		Application::Exit();
-	}*/
 	};
 }
