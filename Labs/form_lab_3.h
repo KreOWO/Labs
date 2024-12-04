@@ -287,7 +287,7 @@ private: System::Windows::Forms::Button^ btn_back;
 			this->btn_3insert->TabIndex = 0;
 			this->btn_3insert->Text = L"Вставить";
 			this->btn_3insert->UseVisualStyleBackColor = true;
-			this->btn_3insert->Click += gcnew System::EventHandler(this, &form_lab_3::btn_3add_Click);
+			this->btn_3insert->Click += gcnew System::EventHandler(this, &form_lab_3::btn_3insert_Click);
 			// 
 			// btn_3generate
 			// 
@@ -1030,25 +1030,26 @@ private: System::Windows::Forms::Button^ btn_back;
 
 		}
 #pragma endregion
-	private: System::Void generate(int arraylen, System::Windows::Forms::DataGridView^ datagrid) {
+	private: System::Void generate(System::Windows::Forms::TextBox^ tb_arraylen, System::Windows::Forms::DataGridView^ datagrid, System::Windows::Forms::Button^ btn) {
+		int arraylen = LabsDLL::FunctsForAll::Vvod(tb_arraylen);
 		int* array = new int[arraylen];
 		LabsDLL::FunctsForAll::GenerateArray(array, arraylen, -100, 100);
 		LabsDLL::FunctsForAll::output_mas(array, arraylen, datagrid);
+		btn->Enabled = true;
 	}
 	private: System::Void any_arraylen_KeyPress(System::Object^ sender, System::Windows::Forms::KeyPressEventArgs^ e) {
 		if (!((e->KeyChar >= '0') && (e->KeyChar <= '9') || (e->KeyChar == 8))) e->KeyChar = Char(0);
 	}
 	private: System::Void btn_3generate_Click(System::Object^ sender, System::EventArgs^ e) {
-		generate(LabsDLL::FunctsForAll::Vvod(tb_3arraylen), dg_3start);
-		btn_3insert->Enabled = true;
+		generate(tb_3arraylen, dg_3start, btn_3insert);
 	}
-	private: System::Void btn_3add_Click(System::Object^ sender, System::EventArgs^ e) {
+	private: System::Void btn_3insert_Click(System::Object^ sender, System::EventArgs^ e) {
 		int arraylen = LabsDLL::FunctsForAll::Vvod(tb_3arraylen);
 		int element = LabsDLL::FunctsForAll::Vvod(tb_3element);
 		int inserdind = LabsDLL::FunctsForAll::Vvod(tb_3insertind);
 		int* array = new int[arraylen + 1] {};
-		LabsDLL::Lab3Functs::Solve3(array, arraylen, element, inserdind);
 		LabsDLL::FunctsForAll::input_mas(array, arraylen, dg_3start);
+		LabsDLL::Lab3Functs::Solve3(array, arraylen, element, inserdind);
 		LabsDLL::FunctsForAll::output_mas(array, arraylen + 1, dg_3result);
 
 	}
@@ -1059,8 +1060,7 @@ private: System::Windows::Forms::Button^ btn_back;
 		if (!((e->KeyChar >= '0') && (e->KeyChar <= '9') || (e->KeyChar == 8))) e->KeyChar = Char(0);
 	}
 	private: System::Void btn_4generate_Click(System::Object^ sender, System::EventArgs^ e) {
-		generate(LabsDLL::FunctsForAll::Vvod(tb_4arraylen), dg_4start);
-		btn_4solve->Enabled = true;
+		generate(tb_4arraylen, dg_4start, btn_4solve);
 	}
 	private: System::Void btn_4solve_Click(System::Object^ sender, System::EventArgs^ e) {
 		int arraylen = LabsDLL::FunctsForAll::Vvod(tb_4arraylen);
@@ -1077,8 +1077,7 @@ private: System::Windows::Forms::Button^ btn_back;
 		}
 	}
 	private: System::Void tb_7generate_Click(System::Object^ sender, System::EventArgs^ e) {
-		generate(LabsDLL::FunctsForAll::Vvod(tb_7arraylen), dg_7start);
-		btn_7solve->Enabled = true;
+		generate(tb_7arraylen, dg_7start, btn_7solve);
 	}
 	private: System::Void btn_7solve_Click(System::Object^ sender, System::EventArgs^ e) {
 		int arraylen = LabsDLL::FunctsForAll::Vvod(tb_7arraylen);
@@ -1099,8 +1098,7 @@ private: System::Windows::Forms::Button^ btn_back;
 
 	}
 	private: System::Void btn_8generate_Click(System::Object^ sender, System::EventArgs^ e) {
-		generate(LabsDLL::FunctsForAll::Vvod(tb_8arraylen), dg_8start);
-		btn_8solve->Enabled = true;
+		generate(tb_8arraylen, dg_8start, btn_8solve);
 	}
 	private: System::Void btn_8solve_Click(System::Object^ sender, System::EventArgs^ e) {
 		int arraylen = LabsDLL::FunctsForAll::Vvod(tb_8arraylen);
@@ -1108,7 +1106,7 @@ private: System::Windows::Forms::Button^ btn_back;
 		LabsDLL::FunctsForAll::input_mas(array, arraylen, dg_8start);
 		int chetval = 0;
 		int chetind = -1;
-		LabsDLL::Lab3Functs::Solve8(array, arraylen, &chetval, &chetind);
+		LabsDLL::Lab3Functs::Solve8(array, arraylen, &chetind, &chetval);
 
 		if (chetind != -1) {
 			LabsDLL::FunctsForAll::Vivod(chetind, tb_8resind);
@@ -1120,8 +1118,7 @@ private: System::Windows::Forms::Button^ btn_back;
 		}
 	}
 	private: System::Void btn_10generate_Click(System::Object^ sender, System::EventArgs^ e) {
-		generate(LabsDLL::FunctsForAll::Vvod(tb_10arraylen), dg_10start);
-		btn_10sort->Enabled = true;
+		generate(tb_10arraylen, dg_10start, btn_10sort);
 	}
 	private: System::Void vtn_10sort_Click(System::Object^ sender, System::EventArgs^ e) {
 		int arraylen = LabsDLL::FunctsForAll::Vvod(tb_10arraylen);
@@ -1131,8 +1128,7 @@ private: System::Windows::Forms::Button^ btn_back;
 		LabsDLL::FunctsForAll::output_mas(array, arraylen, dg_10result);
 	}
 	private: System::Void btn_11generate_Click(System::Object^ sender, System::EventArgs^ e) {
-		generate(LabsDLL::FunctsForAll::Vvod(tb_11arraylen), dg_11start);
-		btn_11sort->Enabled = true;
+		generate(tb_11arraylen, dg_11start, btn_11sort);
 	}
 	private: System::Void btn_11sort_Click(System::Object^ sender, System::EventArgs^ e) {
 		int arraylen = LabsDLL::FunctsForAll::Vvod(tb_11arraylen);
@@ -1142,8 +1138,7 @@ private: System::Windows::Forms::Button^ btn_back;
 		LabsDLL::FunctsForAll::output_mas(array, arraylen, dg_11result);
 	}
 	private: System::Void btn_12generate_Click(System::Object^ sender, System::EventArgs^ e) {
-		generate(LabsDLL::FunctsForAll::Vvod(tb_12arraylen), dg_12start);
-		btn_12sort->Enabled = true;
+		generate(tb_12arraylen, dg_12start, btn_12sort);
 	}
 	private: System::Void btn_12sort_Click(System::Object^ sender, System::EventArgs^ e) {
 		int arraylen = LabsDLL::FunctsForAll::Vvod(tb_12arraylen);
@@ -1153,8 +1148,7 @@ private: System::Windows::Forms::Button^ btn_back;
 		LabsDLL::FunctsForAll::output_mas(array, arraylen, dg_12result);
 	}
 	private: System::Void btn_13generate_Click(System::Object^ sender, System::EventArgs^ e) {
-		generate(LabsDLL::FunctsForAll::Vvod(tb_13arraylen), dg_13start);
-		btn_13sort->Enabled = true;
+		generate(tb_13arraylen, dg_13start, btn_13sort);
 	}
 	private: System::Void btn_13sort_Click(System::Object^ sender, System::EventArgs^ e) {
 		int arraylen = LabsDLL::FunctsForAll::Vvod(tb_13arraylen);
