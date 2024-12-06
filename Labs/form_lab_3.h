@@ -36,35 +36,14 @@ namespace Labs {
 		}
 	private: System::Windows::Forms::DataGridView^ dg_3start;
 	private: System::Windows::Forms::Button^ btn_3insert;
-	protected:
-
-	protected:
-
-	protected:
-
-
-
-
 	private: System::Windows::Forms::Button^ btn_3generate;
 	private: System::Windows::Forms::TextBox^ tb_3arraylen;
-
-
-
-
-
 	private: System::Windows::Forms::Label^ lbl_arraylen;
 	private: System::Windows::Forms::TextBox^ tb_3element;
-
 	private: System::Windows::Forms::Label^ label1;
 	private: System::Windows::Forms::DataGridView^ dg_3result;
-
-
-
-
 	private: System::Windows::Forms::Label^ label2;
 	private: System::Windows::Forms::TextBox^ tb_3insertind;
-
-
 	private: System::Windows::Forms::Label^ label3;
 	private: System::Windows::Forms::Label^ label4;
 	private: System::Windows::Forms::Button^ btn_4generate;
@@ -72,39 +51,22 @@ namespace Labs {
 	private: System::Windows::Forms::Label^ label5;
 	private: System::Windows::Forms::Button^ btn_4solve;
 	private: System::Windows::Forms::DataGridView^ dg_4start;
-
 	private: System::Windows::Forms::TextBox^ tb_4answer;
 	private: System::Windows::Forms::Label^ label6;
 	private: System::Windows::Forms::Label^ label7;
 	private: System::Windows::Forms::TextBox^ tb_7resind;
-
 	private: System::Windows::Forms::Label^ label8;
 	private: System::Windows::Forms::Button^ tb_7generate;
 	private: System::Windows::Forms::TextBox^ tb_7arraylen;
-
-
-
-
 	private: System::Windows::Forms::Label^ label9;
 	private: System::Windows::Forms::Button^ btn_7solve;
 	private: System::Windows::Forms::DataGridView^ dg_7start;
-
-
-
-
-
 	private: System::Windows::Forms::Label^ label11;
 	private: System::Windows::Forms::Button^ btn_8generate;
-
-
 	private: System::Windows::Forms::TextBox^ tb_8arraylen;
-
 	private: System::Windows::Forms::Label^ label12;
 	private: System::Windows::Forms::Button^ btn_8solve;
-
 	private: System::Windows::Forms::DataGridView^ dg_8start;
-
-
 	private: System::Windows::Forms::Label^ label13;
 	private: System::Windows::Forms::Label^ label14;
 	private: System::Windows::Forms::TextBox^ tb_7resval;
@@ -118,13 +80,9 @@ namespace Labs {
 	private: System::Windows::Forms::TextBox^ tb_10arraylen;
 	private: System::Windows::Forms::Label^ label19;
 	private: System::Windows::Forms::Button^ btn_10sort;
-
-
-
 	private: System::Windows::Forms::DataGridView^ dg_10start;
 	private: System::Windows::Forms::Label^ label16;
 	private: System::Windows::Forms::DataGridView^ dg_11result;
-
 	private: System::Windows::Forms::Button^ btn_11generate;
 	private: System::Windows::Forms::TextBox^ tb_11arraylen;
 	private: System::Windows::Forms::Label^ label18;
@@ -132,47 +90,19 @@ namespace Labs {
 	private: System::Windows::Forms::DataGridView^ dg_11start;
 	private: System::Windows::Forms::Label^ label20;
 	private: System::Windows::Forms::DataGridView^ dg_13result;
-
 	private: System::Windows::Forms::Button^ btn_13generate;
 	private: System::Windows::Forms::TextBox^ tb_13arraylen;
-
-
 	private: System::Windows::Forms::Label^ label21;
 	private: System::Windows::Forms::Button^ btn_13sort;
 	private: System::Windows::Forms::DataGridView^ dg_13start;
-
-
 	private: System::Windows::Forms::Label^ label22;
 	private: System::Windows::Forms::DataGridView^ dg_12result;
-
 	private: System::Windows::Forms::Button^ btn_12generate;
 	private: System::Windows::Forms::TextBox^ tb_12arraylen;
-
-
 	private: System::Windows::Forms::Label^ label23;
 	private: System::Windows::Forms::Button^ btn_12sort;
 	private: System::Windows::Forms::DataGridView^ dg_12start;
 private: System::Windows::Forms::Button^ btn_back;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 	private:
 		/// <summary>
 		/// Обязательная переменная конструктора.

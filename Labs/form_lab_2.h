@@ -71,6 +71,11 @@ namespace Labs {
 	private: System::Windows::Forms::TextBox^ tb_resind;
 
 	private: System::Windows::Forms::Label^ label1;
+	private: System::Windows::Forms::Button^ btn_wordwrite;
+	private: System::Windows::Forms::Label^ label2;
+	private: System::Windows::Forms::Button^ btn_excelwrite;
+	private: System::Windows::Forms::Button^ btn_sqlitewrite;
+
 
 
 
@@ -108,6 +113,10 @@ namespace Labs {
 			this->tb_maxvalue = (gcnew System::Windows::Forms::TextBox());
 			this->tb_resind = (gcnew System::Windows::Forms::TextBox());
 			this->label1 = (gcnew System::Windows::Forms::Label());
+			this->btn_wordwrite = (gcnew System::Windows::Forms::Button());
+			this->label2 = (gcnew System::Windows::Forms::Label());
+			this->btn_excelwrite = (gcnew System::Windows::Forms::Button());
+			this->btn_sqlitewrite = (gcnew System::Windows::Forms::Button());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->bp_task))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dg_start))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dg_result))->BeginInit();
@@ -259,11 +268,54 @@ namespace Labs {
 			this->label1->TabIndex = 17;
 			this->label1->Text = L"Индекс максимального четного элемента";
 			// 
+			// btn_wordwrite
+			// 
+			this->btn_wordwrite->Location = System::Drawing::Point(285, 477);
+			this->btn_wordwrite->Name = L"btn_wordwrite";
+			this->btn_wordwrite->Size = System::Drawing::Size(76, 23);
+			this->btn_wordwrite->TabIndex = 19;
+			this->btn_wordwrite->Text = L"Word";
+			this->btn_wordwrite->UseVisualStyleBackColor = true;
+			this->btn_wordwrite->Click += gcnew System::EventHandler(this, &form_lab_2::btn_wordwrite_Click);
+			// 
+			// label2
+			// 
+			this->label2->AutoSize = true;
+			this->label2->Location = System::Drawing::Point(215, 482);
+			this->label2->Name = L"label2";
+			this->label2->Size = System::Drawing::Size(64, 13);
+			this->label2->TabIndex = 20;
+			this->label2->Text = L"Записать в";
+			// 
+			// btn_excelwrite
+			// 
+			this->btn_excelwrite->Location = System::Drawing::Point(367, 477);
+			this->btn_excelwrite->Name = L"btn_excelwrite";
+			this->btn_excelwrite->Size = System::Drawing::Size(75, 23);
+			this->btn_excelwrite->TabIndex = 21;
+			this->btn_excelwrite->Text = L"Excel";
+			this->btn_excelwrite->UseVisualStyleBackColor = true;
+			this->btn_excelwrite->Click += gcnew System::EventHandler(this, &form_lab_2::btn_excelwrite_Click);
+			// 
+			// btn_sqlitewrite
+			// 
+			this->btn_sqlitewrite->Location = System::Drawing::Point(448, 477);
+			this->btn_sqlitewrite->Name = L"btn_sqlitewrite";
+			this->btn_sqlitewrite->Size = System::Drawing::Size(76, 23);
+			this->btn_sqlitewrite->TabIndex = 22;
+			this->btn_sqlitewrite->Text = L"SQLite";
+			this->btn_sqlitewrite->UseVisualStyleBackColor = true;
+			this->btn_sqlitewrite->Click += gcnew System::EventHandler(this, &form_lab_2::btn_sqlitewrite_Click);
+			// 
 			// form_lab_2
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(539, 511);
+			this->Controls->Add(this->btn_sqlitewrite);
+			this->Controls->Add(this->btn_excelwrite);
+			this->Controls->Add(this->label2);
+			this->Controls->Add(this->btn_wordwrite);
 			this->Controls->Add(this->tb_resind);
 			this->Controls->Add(this->label1);
 			this->Controls->Add(this->dg_result);
@@ -327,5 +379,27 @@ namespace Labs {
 	private: System::Void tb_startarray_KeyPress(System::Object^ sender, System::Windows::Forms::KeyPressEventArgs^ e) {
 		if (!((e->KeyChar >= '0') && (e->KeyChar <= '9') || (e->KeyChar == '-') || (e->KeyChar == ' ') || (e->KeyChar == 8))) e->KeyChar = Char(0);
 	}
-	};
+	private: System::Void btn_wordwrite_Click(System::Object^ sender, System::EventArgs^ e) {
+		int arraylen = LabsDLL::FunctsForAll::Vvod(tb_arraylen);
+		int* array = new int[arraylen] {};
+		LabsDLL::FunctsForAll::input_mas(array, arraylen, dg_start);
+		int maxchetind = LabsDLL::Lab2Functs::SearchMaxChetInd(array, arraylen);
+		int resarraylen = LabsDLL::Lab2Functs::SearchNewArrayLen(array, arraylen, maxchetind);
+		int* resarray = new int[resarraylen] {};
+		LabsDLL::FunctsForAll::input_mas(resarray, resarraylen, dg_result);
+		LabsDLL::FunctsForAll::ZapisWord(array, resarray, arraylen, resarraylen);
+	}
+	private: System::Void btn_excelwrite_Click(System::Object^ sender, System::EventArgs^ e) {
+		int arraylen = LabsDLL::FunctsForAll::Vvod(tb_arraylen);
+		int* array = new int[arraylen] {};
+		LabsDLL::FunctsForAll::input_mas(array, arraylen, dg_start);
+		int maxchetind = LabsDLL::Lab2Functs::SearchMaxChetInd(array, arraylen);
+		int resarraylen = LabsDLL::Lab2Functs::SearchNewArrayLen(array, arraylen, maxchetind);
+		int* resarray = new int[resarraylen] {};
+		LabsDLL::FunctsForAll::input_mas(resarray, resarraylen, dg_result);
+		LabsDLL::FunctsForAll::ZapisExcel(array, resarray, arraylen, resarraylen);
+	}
+	private: System::Void btn_sqlitewrite_Click(System::Object^ sender, System::EventArgs^ e) {
+	}
+};
 }

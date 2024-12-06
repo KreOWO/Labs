@@ -2,6 +2,9 @@
 
 using namespace System;
 using namespace System::Windows::Forms;
+using namespace Microsoft::Office::Interop;
+using namespace Microsoft::VisualBasic;
+using namespace System::IO;
 
 namespace LabsDLL {
     public ref class FunctsForAll
@@ -13,6 +16,11 @@ namespace LabsDLL {
         static void output_mas(int* array, int arraylen, System::Windows::Forms::DataGridView^ datagrid);
         static void GenerateArray(int* array, int arraylen, int minvalue, int maxvalue);
         static void input_mas(int* array, int arraylen, System::Windows::Forms::DataGridView^ datagrid);
+        static void add();
+        static void add_struct();
+        static void add_zap(int* arr, int* rezmas, int len, int j);
+        static void ZapisWord(int* mas, int* rezmas, int n, int j);
+        static void ZapisExcel(int* mas, int* rezmas, int n, int j);
     };
 
     public ref class Lab1Functs
