@@ -17,10 +17,15 @@ namespace LabsDLL {
         static void GenerateArray(int* array, int arraylen, int minvalue, int maxvalue);
         static void input_mas(int* array, int arraylen, System::Windows::Forms::DataGridView^ datagrid);
         static void add();
-        static void add_struct();
-        static void add_zap(int* arr, int* rezmas, int len, int j);
-        static void ZapisWord(int* mas, int* rezmas, int n, int j);
-        static void ZapisExcel(int* mas, int* rezmas, int n, int j);
+        static void add_struct(array<String^>^ names, int colvo, String^ tablename);
+        static void add_zap(String^ name, String^ value, String^ tablename);
+        static void add_zap(String^ name, int* array, int array_len, String^ tablename);
+        static Microsoft::Office::Interop::Word::ApplicationClass^ CreateWordDoc();
+        static void ZapisWordValue(String^ nazv, String^ value, Microsoft::Office::Interop::Word::ApplicationClass^ Wrd);
+        static void ZapisWordOneArr(String^ nazv, int* arr, int arr_len, Microsoft::Office::Interop::Word::ApplicationClass^ Wrd);
+        static Microsoft::Office::Interop::Excel::ApplicationClass^ CreateExcelDoc();
+        static void ZapisExcelValue(String^ nazv, String^ value, Microsoft::Office::Interop::Excel::ApplicationClass^ XL);
+        static void ZapisExcelOneArr(String^ nazv, int* arr, int arr_len, Microsoft::Office::Interop::Excel::ApplicationClass^ XL);
     };
 
     public ref class Lab1Functs

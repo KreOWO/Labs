@@ -191,6 +191,7 @@ namespace Labs {
 			// 
 			// btn_solve
 			// 
+			this->btn_solve->Enabled = false;
 			this->btn_solve->Location = System::Drawing::Point(342, 220);
 			this->btn_solve->Name = L"btn_solve";
 			this->btn_solve->Size = System::Drawing::Size(75, 23);
@@ -270,13 +271,14 @@ namespace Labs {
 			// 
 			// btn_wordwrite
 			// 
+			this->btn_wordwrite->Enabled = false;
 			this->btn_wordwrite->Location = System::Drawing::Point(285, 477);
 			this->btn_wordwrite->Name = L"btn_wordwrite";
 			this->btn_wordwrite->Size = System::Drawing::Size(76, 23);
 			this->btn_wordwrite->TabIndex = 19;
 			this->btn_wordwrite->Text = L"Word";
 			this->btn_wordwrite->UseVisualStyleBackColor = true;
-			this->btn_wordwrite->Click += gcnew System::EventHandler(this, &form_lab_2::btn_wordwrite_Click);
+			this->btn_wordwrite->Click += gcnew System::EventHandler(this, &form_lab_2::btn_dbwrite_Click);
 			// 
 			// label2
 			// 
@@ -289,23 +291,25 @@ namespace Labs {
 			// 
 			// btn_excelwrite
 			// 
+			this->btn_excelwrite->Enabled = false;
 			this->btn_excelwrite->Location = System::Drawing::Point(367, 477);
 			this->btn_excelwrite->Name = L"btn_excelwrite";
 			this->btn_excelwrite->Size = System::Drawing::Size(75, 23);
 			this->btn_excelwrite->TabIndex = 21;
 			this->btn_excelwrite->Text = L"Excel";
 			this->btn_excelwrite->UseVisualStyleBackColor = true;
-			this->btn_excelwrite->Click += gcnew System::EventHandler(this, &form_lab_2::btn_excelwrite_Click);
+			this->btn_excelwrite->Click += gcnew System::EventHandler(this, &form_lab_2::btn_dbwrite_Click);
 			// 
 			// btn_sqlitewrite
 			// 
+			this->btn_sqlitewrite->Enabled = false;
 			this->btn_sqlitewrite->Location = System::Drawing::Point(448, 477);
 			this->btn_sqlitewrite->Name = L"btn_sqlitewrite";
 			this->btn_sqlitewrite->Size = System::Drawing::Size(76, 23);
 			this->btn_sqlitewrite->TabIndex = 22;
 			this->btn_sqlitewrite->Text = L"SQLite";
 			this->btn_sqlitewrite->UseVisualStyleBackColor = true;
-			this->btn_sqlitewrite->Click += gcnew System::EventHandler(this, &form_lab_2::btn_sqlitewrite_Click);
+			this->btn_sqlitewrite->Click += gcnew System::EventHandler(this, &form_lab_2::btn_dbwrite_Click);
 			// 
 			// form_lab_2
 			// 
@@ -347,6 +351,7 @@ namespace Labs {
 		this->Close();
 	}
 	private: System::Void btn_generate_Click(System::Object^ sender, System::EventArgs^ e) {
+		btn_solve->Enabled = true;
 		int arraylen, minvalue, maxvalue;
 		arraylen = LabsDLL::FunctsForAll::Vvod(tb_arraylen);
 		minvalue = LabsDLL::FunctsForAll::Vvod(tb_minvalue);
@@ -357,6 +362,9 @@ namespace Labs {
 
 	}
 	private: System::Void btn_solve_Click(System::Object^ sender, System::EventArgs^ e) {
+		btn_wordwrite->Enabled = true;
+		btn_excelwrite->Enabled = true;
+		btn_sqlitewrite->Enabled = true;
 		int arraylen = LabsDLL::FunctsForAll::Vvod(tb_arraylen);
 		int* array = new int[arraylen]{};
 		LabsDLL::FunctsForAll::input_mas(array, arraylen, dg_start);
@@ -379,27 +387,34 @@ namespace Labs {
 	private: System::Void tb_startarray_KeyPress(System::Object^ sender, System::Windows::Forms::KeyPressEventArgs^ e) {
 		if (!((e->KeyChar >= '0') && (e->KeyChar <= '9') || (e->KeyChar == '-') || (e->KeyChar == ' ') || (e->KeyChar == 8))) e->KeyChar = Char(0);
 	}
-	private: System::Void btn_wordwrite_Click(System::Object^ sender, System::EventArgs^ e) {
+	private: System::Void btn_dbwrite_Click(System::Object^ sender, System::EventArgs^ e) {
 		int arraylen = LabsDLL::FunctsForAll::Vvod(tb_arraylen);
-		int* array = new int[arraylen] {};
-		LabsDLL::FunctsForAll::input_mas(array, arraylen, dg_start);
-		int maxchetind = LabsDLL::Lab2Functs::SearchMaxChetInd(array, arraylen);
-		int resarraylen = LabsDLL::Lab2Functs::SearchNewArrayLen(array, arraylen, maxchetind);
+		int* arr = new int[arraylen] {};
+		LabsDLL::FunctsForAll::input_mas(arr, arraylen, dg_start);
+		int maxchetind = LabsDLL::Lab2Functs::SearchMaxChetInd(arr, arraylen);
+		int resarraylen = LabsDLL::Lab2Functs::SearchNewArrayLen(arr, arraylen, maxchetind);
 		int* resarray = new int[resarraylen] {};
 		LabsDLL::FunctsForAll::input_mas(resarray, resarraylen, dg_result);
-		LabsDLL::FunctsForAll::ZapisWord(array, resarray, arraylen, resarraylen);
-	}
-	private: System::Void btn_excelwrite_Click(System::Object^ sender, System::EventArgs^ e) {
-		int arraylen = LabsDLL::FunctsForAll::Vvod(tb_arraylen);
-		int* array = new int[arraylen] {};
-		LabsDLL::FunctsForAll::input_mas(array, arraylen, dg_start);
-		int maxchetind = LabsDLL::Lab2Functs::SearchMaxChetInd(array, arraylen);
-		int resarraylen = LabsDLL::Lab2Functs::SearchNewArrayLen(array, arraylen, maxchetind);
-		int* resarray = new int[resarraylen] {};
-		LabsDLL::FunctsForAll::input_mas(resarray, resarraylen, dg_result);
-		LabsDLL::FunctsForAll::ZapisExcel(array, resarray, arraylen, resarraylen);
-	}
-	private: System::Void btn_sqlitewrite_Click(System::Object^ sender, System::EventArgs^ e) {
+
+		if (sender == btn_wordwrite) {
+			auto Wrd = LabsDLL::FunctsForAll::CreateWordDoc();
+			LabsDLL::FunctsForAll::ZapisWordOneArr("Исходный массив", arr, arraylen, Wrd);
+			LabsDLL::FunctsForAll::ZapisWordOneArr("Результирующий массив", resarray, resarraylen, Wrd);
+		}
+		else if (sender == btn_excelwrite) {
+			auto XL = LabsDLL::FunctsForAll::CreateExcelDoc();
+			LabsDLL::FunctsForAll::ZapisExcelOneArr("Исходный массив", arr, arraylen, XL);
+			LabsDLL::FunctsForAll::ZapisExcelOneArr("Результирующий массив", resarray, resarraylen, XL);
+		}
+		else if (sender == btn_sqlitewrite) {
+			LabsDLL::FunctsForAll::add();
+			array<String^>^ names = gcnew array<String^> {"Исходный массив", "Результирующий массив"};
+			LabsDLL::FunctsForAll::add_struct(names, 2, "Massivs");
+			MessageBox::Show("Структура базы данных записана");
+			LabsDLL::FunctsForAll::add_zap(names[1], resarray, resarraylen, "Massivs");
+			LabsDLL::FunctsForAll::add_zap(names[0], arr, arraylen, "Massivs");
+			MessageBox::Show("Все записи добавлены");
+		}
 	}
 };
 }

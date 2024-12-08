@@ -43,8 +43,8 @@ namespace Labs {
 	private: System::Windows::Forms::Button^ btn_lab_1;
 	private: System::Windows::Forms::Button^ btn_lab_2;
 	private: System::Windows::Forms::Button^ btn_lab_3;
-	private: System::Windows::Forms::Button^ btn_lab_4;
-	private: System::Windows::Forms::Button^ btn_lab_5;
+
+
 	private: System::Windows::Forms::Label^ lbl_MTUCI;
 	private: System::Windows::Forms::Label^ lbl_kafedra;
 	private: System::Windows::Forms::Label^ lbl_disciplina;
@@ -76,8 +76,6 @@ namespace Labs {
 			this->btn_lab_1 = (gcnew System::Windows::Forms::Button());
 			this->btn_lab_2 = (gcnew System::Windows::Forms::Button());
 			this->btn_lab_3 = (gcnew System::Windows::Forms::Button());
-			this->btn_lab_4 = (gcnew System::Windows::Forms::Button());
-			this->btn_lab_5 = (gcnew System::Windows::Forms::Button());
 			this->lbl_MTUCI = (gcnew System::Windows::Forms::Label());
 			this->lbl_kafedra = (gcnew System::Windows::Forms::Label());
 			this->lbl_disciplina = (gcnew System::Windows::Forms::Label());
@@ -91,7 +89,7 @@ namespace Labs {
 			// 
 			// btn_lab_1
 			// 
-			this->btn_lab_1->Location = System::Drawing::Point(12, 398);
+			this->btn_lab_1->Location = System::Drawing::Point(12, 455);
 			this->btn_lab_1->Name = L"btn_lab_1";
 			this->btn_lab_1->Size = System::Drawing::Size(154, 23);
 			this->btn_lab_1->TabIndex = 0;
@@ -101,7 +99,7 @@ namespace Labs {
 			// 
 			// btn_lab_2
 			// 
-			this->btn_lab_2->Location = System::Drawing::Point(12, 427);
+			this->btn_lab_2->Location = System::Drawing::Point(12, 484);
 			this->btn_lab_2->Name = L"btn_lab_2";
 			this->btn_lab_2->Size = System::Drawing::Size(154, 23);
 			this->btn_lab_2->TabIndex = 1;
@@ -111,31 +109,13 @@ namespace Labs {
 			// 
 			// btn_lab_3
 			// 
-			this->btn_lab_3->Location = System::Drawing::Point(12, 456);
+			this->btn_lab_3->Location = System::Drawing::Point(12, 513);
 			this->btn_lab_3->Name = L"btn_lab_3";
 			this->btn_lab_3->Size = System::Drawing::Size(154, 23);
 			this->btn_lab_3->TabIndex = 2;
 			this->btn_lab_3->Text = L"Лабораторная работа 3";
 			this->btn_lab_3->UseVisualStyleBackColor = true;
 			this->btn_lab_3->Click += gcnew System::EventHandler(this, &form_main::btn_lab_3_Click);
-			// 
-			// btn_lab_4
-			// 
-			this->btn_lab_4->Location = System::Drawing::Point(12, 485);
-			this->btn_lab_4->Name = L"btn_lab_4";
-			this->btn_lab_4->Size = System::Drawing::Size(154, 23);
-			this->btn_lab_4->TabIndex = 3;
-			this->btn_lab_4->Text = L"Лабораторная работа 4";
-			this->btn_lab_4->UseVisualStyleBackColor = true;
-			// 
-			// btn_lab_5
-			// 
-			this->btn_lab_5->Location = System::Drawing::Point(12, 514);
-			this->btn_lab_5->Name = L"btn_lab_5";
-			this->btn_lab_5->Size = System::Drawing::Size(154, 23);
-			this->btn_lab_5->TabIndex = 4;
-			this->btn_lab_5->Text = L"Лабораторная работа 5";
-			this->btn_lab_5->UseVisualStyleBackColor = true;
 			// 
 			// lbl_MTUCI
 			// 
@@ -219,7 +199,7 @@ namespace Labs {
 			// 
 			// btn_dop
 			// 
-			this->btn_dop->Location = System::Drawing::Point(12, 543);
+			this->btn_dop->Location = System::Drawing::Point(12, 542);
 			this->btn_dop->Name = L"btn_dop";
 			this->btn_dop->Size = System::Drawing::Size(154, 23);
 			this->btn_dop->TabIndex = 13;
@@ -241,8 +221,6 @@ namespace Labs {
 			this->Controls->Add(this->lbl_disciplina);
 			this->Controls->Add(this->lbl_kafedra);
 			this->Controls->Add(this->lbl_MTUCI);
-			this->Controls->Add(this->btn_lab_5);
-			this->Controls->Add(this->btn_lab_4);
 			this->Controls->Add(this->btn_lab_3);
 			this->Controls->Add(this->btn_lab_2);
 			this->Controls->Add(this->btn_lab_1);

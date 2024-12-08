@@ -10,6 +10,9 @@ using namespace Microsoft::Office::Interop;
 using namespace Microsoft::VisualBasic;
 using namespace System::IO;
 
+#define SQLiteDBPath "D:\\Downloads\\New_BD_mass.mdb"
+
+
 namespace LabsDLL {
     // Общие функции для всех лабораторных работ
     double FunctsForAll::Vvod(TextBox^ t)
@@ -17,6 +20,9 @@ namespace LabsDLL {
         if (t->Text == "") {
             t->Text = "0";
             return 0;
+        }
+        else if (t->Text == "Неизвестно") {
+            return -1;
         }
         else {
             return Convert::ToDouble(t->Text->Replace('.', ','));
@@ -55,8 +61,10 @@ namespace LabsDLL {
     }
 
     void FunctsForAll::input_mas(int* array, int arraylen, System::Windows::Forms::DataGridView^ datagrid) {
-        for (int i = 0; i < arraylen; i++) {
-            array[i] = Convert::ToInt32(datagrid->Rows[0]->Cells[i]->Value);
+        if (datagrid->ColumnCount > 0) {
+            for (int i = 0; i < arraylen; i++) {
+                array[i] = Convert::ToInt32(datagrid->Rows[0]->Cells[i]->Value);
+            }
         }
     }
 
@@ -64,7 +72,7 @@ namespace LabsDLL {
     {
         ADOX::Catalog^ k = gcnew ADOX::CatalogClass();
         try {
-            k->Create("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=C:\\Users\\docent\\sourse\\repos\\New_BD_mass.mdb");
+            k->Create("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + SQLiteDBPath);
             MessageBox::Show("База данных успешно создана");
         }
         catch (System::Runtime::InteropServices::COMException^ situation)
@@ -77,15 +85,19 @@ namespace LabsDLL {
         }
     }
 
-    void FunctsForAll::add_struct()
+    void FunctsForAll::add_struct(array<String^>^ names, int colvo, String^ tablename)
     {
-        auto p = gcnew OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=C:\\Users\\docent\\source\\repos\\New_BD_mass.mdb");
+        auto p = gcnew OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + SQLiteDBPath);
         p->Open();
-        auto c = gcnew OleDbCommand("CREATE TABLE [Massivs] ([Номер элемента] counter, [Исходный массив] char(200), [Результирующий массив] char(200)", p);
+        String^ rescom = "CREATE TABLE [" + tablename + "] ([Номер элемента] counter";
+        for (int i = 0; i < colvo; i++) {
+            rescom += ", [" + names[i] + "] char(200)";
+        }
+        rescom += ")";
+        auto c = gcnew OleDbCommand(rescom, p);
         try
         {
-            c->ExecuteNonQuery(); //Возвращает количество измененных записей
-            MessageBox::Show("Структура базы данных записана");
+            c->ExecuteNonQuery();
         }
         catch (Exception^ situation)
         {
@@ -94,87 +106,122 @@ namespace LabsDLL {
         p->Close();
     }
 
-    void FunctsForAll::add_zap(int* arr, int* rezmas, int len, int j)
+    void FunctsForAll::add_zap(String^ name, String^ value, String^ tablename)
     {
-        for (int i = 0; i < len; i++)
+        auto p = gcnew OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + SQLiteDBPath);
+        p->Open();
+        auto CMDRowsCount = gcnew OleDbCommand("SELECT COUNT(*) FROM [" + tablename + "]", p);
+        int rowsCount = Convert::ToInt32(CMDRowsCount->ExecuteScalar());
+        if (rowsCount == 0) {
+            auto c = gcnew OleDbCommand("UPDATE [" + tablename + "] SET [" + name + "] = " + value + " WHERE [Номер элемента] = 1", p);
+            c->Connection = p;
+            c->ExecuteNonQuery();
+        }
+        else {
+            auto c = gcnew OleDbCommand("INSERT INTO [" + tablename + "]([" + name + "]) VALUES('" + value + "')");
+            c->Connection = p;
+            c->ExecuteNonQuery();
+        }
+        p->Close();
+    }
+
+    void FunctsForAll::add_zap(String^ name, int* array, int array_len, String^ tablename)
+    {
+        auto p = gcnew OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + SQLiteDBPath);
+        p->Open();
+        auto CMDRowsCount = gcnew OleDbCommand("SELECT COUNT(*) FROM [" + tablename + "]", p);
+        int rowsCount = Convert::ToInt32(CMDRowsCount->ExecuteScalar());
+        for (int i = 0; i < array_len; i++)
         {
-            auto p = gcnew OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=C:\\Users\\docent\\source\\repos\\New_BD_mass.mdb");
-            p->Open();
-            if (i < j)
-            {
-                auto c = gcnew OleDbCommand("INSERT INTO [Massivs](" + "[Исходный массив],[Результирующий массив]" + ") VALUES(\"" + arr[i] + "','" + rezmas[i] + "\")");
+            if (i + 1 <= rowsCount) {
+                auto c = gcnew OleDbCommand("UPDATE [" + tablename + "] SET [" + name + "] = " + array[i] + " WHERE [Номер элемента] = " + (i + 1), p);
                 c->Connection = p;
-                c->ExecuteNonQuery(); //Выход из SQL - команды 
-
+                c->ExecuteNonQuery();
             }
-            else
-            {
-                auto c = gcnew OleDbCommand("INSERT INTO [Massivs](" + "[Исходныймассив],[Результирующиймассив]" + ") VALUES (\"" + arr[i] + "\", '')");
+            else {
+                auto c = gcnew OleDbCommand("INSERT INTO [" + tablename + "]([" + name + "]) VALUES('" + array[i] + "')");
                 c->Connection = p;
-                c->ExecuteNonQuery(); // Выход из  SQL - команды
-
+                c->ExecuteNonQuery();
             }
-            p->Close(); //Закрываем подключение к БД  
-            MessageBox::Show("В таблицу 'Массивы' добавлена запись");
+        }
+        p->Close();
+    }
+
+    void FunctsForAll::ZapisWordValue(String^ nazv, String^ value, Microsoft::Office::Interop::Word::ApplicationClass^ Wrd) {
+        Wrd->Selection->TypeText(nazv);
+        Wrd->Selection->TypeParagraph();
+        Wrd->Selection->TypeText(value);
+        Wrd->Selection->TypeParagraph();
+        Wrd->Selection->TypeParagraph();
+    }
+
+    void FunctsForAll::ZapisWordOneArr(String^ nazv, int* arr, int arr_len, Microsoft::Office::Interop::Word::ApplicationClass^ Wrd) {
+        Wrd->Selection->TypeText(nazv);
+        Wrd->Selection->TypeParagraph();
+        Wrd->Selection->TypeParagraph();
+        Wrd->Selection->TypeParagraph();
+        Object^ t1 = Microsoft::Office::Interop::Word::WdDefaultTableBehavior::wdWord9TableBehavior;
+        Object^ t2 = Microsoft::Office::Interop::Word::WdAutoFitBehavior::wdAutoFitContent;
+        String^ str;
+        Microsoft::Office::Interop::Word::Table^ tbl = Wrd->ActiveDocument->Tables->Add(Wrd->ActiveDocument->Paragraphs[Wrd->ActiveDocument->Paragraphs->Count - 2]->Range, 2, arr_len, t1, t2);
+        for (int i = 0; i < arr_len; i++)
+        {
+            tbl->Cell(1, i + 1)->Range->InsertAfter("[" + Convert::ToString(i) + "]");
+            str = String::Format("{0:f0}", arr[i]);
+            tbl->Cell(2, i + 1)->Range->InsertAfter(str);
         }
     }
 
-    void FunctsForAll::ZapisWord(int* mas, int* rezmas, int n, int j)
+    Microsoft::Office::Interop::Word::ApplicationClass^ FunctsForAll::CreateWordDoc()
     {
         auto Wrd = gcnew Microsoft::Office::Interop::Word::ApplicationClass();
         Wrd->Visible = true;
         auto inf = Type::Missing;
-        String^ str;
-
         auto Doc = Wrd->Documents->Add(inf, inf, inf, inf);
-        Wrd->Selection->TypeText("Исходный массив");
-        Wrd->Selection->TypeParagraph();
-        Object^ t1 = Microsoft::Office::Interop::Word::WdDefaultTableBehavior::wdWord9TableBehavior;
-        Object^ t2 = Microsoft::Office::Interop::Word::WdAutoFitBehavior::wdAutoFitContent;
-        Wrd->Selection->TypeParagraph();
-        Wrd->Selection->TypeParagraph();
-        Microsoft::Office::Interop::Word::Table^ tbl = Wrd->ActiveDocument->Tables->Add(Wrd->ActiveDocument->Paragraphs[2]->Range, 2, n, t1, t2);
-        for (int i = 0; i < n; i++)
-        {
-            tbl->Cell(1, i + 1)->Range->InsertAfter("[" + Convert::ToString(i) + "]");
-            str = String::Format("{0:f0}", mas[i]);
-            tbl->Cell(2, i + 1)->Range->InsertAfter(str);
-        }
-        String^ str2;
-        Wrd->Selection->TypeText("Результирующий массив");
-        Microsoft::Office::Interop::Word::Table^ tbl2 = Wrd->ActiveDocument->Tables->Add(Wrd->Selection->Range, 2, j, t1, t2);
-        for (int i = 0; i < j; i++)
-        {
-            tbl2->Cell(1, i + 1)->Range->InsertAfter("[" + Convert::ToString(i) + "]");
-            str2 = String::Format("{0:f0}", rezmas[i]);
-            tbl2->Cell(2, i + 1)->Range->InsertAfter(str2);
-        }
+        return Wrd;
 
     }
 
-    void FunctsForAll::ZapisExcel(int* mas, int* rezmas, int n, int j)
-    {
+    void FunctsForAll::ZapisExcelValue(String^ nazv, String^ value, Microsoft::Office::Interop::Excel::ApplicationClass^ XL) {
+        auto sheet = (Microsoft::Office::Interop::Excel::Worksheet^)XL->ActiveSheet;
+        int LastRow = sheet->UsedRange->Rows->Count;
+        int NewRow;
+        if (LastRow == 1) {
+            NewRow = 1;
+        }
+        else {
+            NewRow = LastRow + 2;
+        }
+        XL->Cells[NewRow, 1] = nazv;
+        XL->Cells[NewRow + 1, 1] = value;
+    }
+
+    void FunctsForAll::ZapisExcelOneArr(String^ nazv, int* arr, int arr_len, Microsoft::Office::Interop::Excel::ApplicationClass^ XL) {
+        auto sheet = (Microsoft::Office::Interop::Excel::Worksheet^)XL->ActiveSheet;
+        int LastRow = sheet->UsedRange->Rows->Count;
+        int NewRow;
+        if (LastRow == 1) {
+            NewRow = 1;
+        }
+        else {
+            NewRow = LastRow + 2;
+        }
+        String^ str;
+        XL->Cells[NewRow, 1] = nazv;
+        for (int i = 0; i < arr_len; i++)
+        {
+            XL->Cells[NewRow + 1, i + 1] = Convert::ToString(i);
+            str = String::Format("{0:f0}", arr[i]);
+            XL->Cells[NewRow + 2, i + 1] = str;
+        }
+    }
+
+    Microsoft::Office::Interop::Excel::ApplicationClass^ FunctsForAll::CreateExcelDoc() {
         auto XL = gcnew Microsoft::Office::Interop::Excel::Application();
         XL->Visible = true;
         Object^ t = Type::Missing;
         auto Workbook = XL->Workbooks->Add(t);
-        String^ str;
-
-        XL->Cells[1, 1] = "Исходный массив";
-        for (int i = 0; i < n; i++)
-        {
-            XL->Cells[2, i + 1] = Convert::ToString(i);
-            str = String::Format("{0:f0}", mas[i]);
-            XL->Cells[3, i + 1] = str;
-        }
-
-        XL->Cells[5, 1] = "Результирующий массив";
-        for (int i = 0; i < j; i++)
-        {
-            XL->Cells[6, i + 1] = Convert::ToString(i);
-            str = String::Format("{0:f0}", rezmas[i]);
-            XL->Cells[7, i + 1] = str;
-        }
+        return XL;
     }
 
 

@@ -56,7 +56,8 @@ namespace Labs {
 	private: System::Windows::Forms::Label^ label7;
 	private: System::Windows::Forms::TextBox^ tb_7resind;
 	private: System::Windows::Forms::Label^ label8;
-	private: System::Windows::Forms::Button^ tb_7generate;
+	private: System::Windows::Forms::Button^ btn_7generate;
+
 	private: System::Windows::Forms::TextBox^ tb_7arraylen;
 	private: System::Windows::Forms::Label^ label9;
 	private: System::Windows::Forms::Button^ btn_7solve;
@@ -103,6 +104,14 @@ namespace Labs {
 	private: System::Windows::Forms::Button^ btn_12sort;
 	private: System::Windows::Forms::DataGridView^ dg_12start;
 private: System::Windows::Forms::Button^ btn_back;
+	private: System::Windows::Forms::Button^ btn_sqlitewrite;
+	private: System::Windows::Forms::Button^ btn_excelwrite;
+	private: System::Windows::Forms::Label^ label24;
+	private: System::Windows::Forms::Button^ btn_wordwrite;
+	private: System::Windows::Forms::Button^ btn_generateall;
+	private: System::Windows::Forms::Button^ btn_solveall;
+
+
 	private:
 		/// <summary>
 		/// Обязательная переменная конструктора.
@@ -138,7 +147,7 @@ private: System::Windows::Forms::Button^ btn_back;
 			this->label7 = (gcnew System::Windows::Forms::Label());
 			this->tb_7resind = (gcnew System::Windows::Forms::TextBox());
 			this->label8 = (gcnew System::Windows::Forms::Label());
-			this->tb_7generate = (gcnew System::Windows::Forms::Button());
+			this->btn_7generate = (gcnew System::Windows::Forms::Button());
 			this->tb_7arraylen = (gcnew System::Windows::Forms::TextBox());
 			this->label9 = (gcnew System::Windows::Forms::Label());
 			this->btn_7solve = (gcnew System::Windows::Forms::Button());
@@ -185,6 +194,12 @@ private: System::Windows::Forms::Button^ btn_back;
 			this->btn_12sort = (gcnew System::Windows::Forms::Button());
 			this->dg_12start = (gcnew System::Windows::Forms::DataGridView());
 			this->btn_back = (gcnew System::Windows::Forms::Button());
+			this->btn_sqlitewrite = (gcnew System::Windows::Forms::Button());
+			this->btn_excelwrite = (gcnew System::Windows::Forms::Button());
+			this->label24 = (gcnew System::Windows::Forms::Label());
+			this->btn_wordwrite = (gcnew System::Windows::Forms::Button());
+			this->btn_generateall = (gcnew System::Windows::Forms::Button());
+			this->btn_solveall = (gcnew System::Windows::Forms::Button());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dg_3start))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dg_3result))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dg_4start))->BeginInit();
@@ -412,16 +427,16 @@ private: System::Windows::Forms::Button^ btn_back;
 			this->label8->TabIndex = 32;
 			this->label8->Text = L"7. НАХОЖДЕНИЕ ПЕРВОГО ПОЛОЖИТЕЛЬНОГО ЭЛЕМЕНТА";
 			// 
-			// tb_7generate
+			// btn_7generate
 			// 
-			this->tb_7generate->BackColor = System::Drawing::SystemColors::Control;
-			this->tb_7generate->Location = System::Drawing::Point(335, 290);
-			this->tb_7generate->Name = L"tb_7generate";
-			this->tb_7generate->Size = System::Drawing::Size(111, 23);
-			this->tb_7generate->TabIndex = 31;
-			this->tb_7generate->Text = L"Сгенерировать";
-			this->tb_7generate->UseVisualStyleBackColor = false;
-			this->tb_7generate->Click += gcnew System::EventHandler(this, &form_lab_3::tb_7generate_Click);
+			this->btn_7generate->BackColor = System::Drawing::SystemColors::Control;
+			this->btn_7generate->Location = System::Drawing::Point(335, 290);
+			this->btn_7generate->Name = L"btn_7generate";
+			this->btn_7generate->Size = System::Drawing::Size(111, 23);
+			this->btn_7generate->TabIndex = 31;
+			this->btn_7generate->Text = L"Сгенерировать";
+			this->btn_7generate->UseVisualStyleBackColor = false;
+			this->btn_7generate->Click += gcnew System::EventHandler(this, &form_lab_3::btn_7generate_Click);
 			// 
 			// tb_7arraylen
 			// 
@@ -645,7 +660,7 @@ private: System::Windows::Forms::Button^ btn_back;
 			this->btn_10sort->TabIndex = 50;
 			this->btn_10sort->Text = L"Сортировать";
 			this->btn_10sort->UseVisualStyleBackColor = true;
-			this->btn_10sort->Click += gcnew System::EventHandler(this, &form_lab_3::vtn_10sort_Click);
+			this->btn_10sort->Click += gcnew System::EventHandler(this, &form_lab_3::btn_10sort_Click);
 			// 
 			// dg_10start
 			// 
@@ -866,11 +881,76 @@ private: System::Windows::Forms::Button^ btn_back;
 			this->btn_back->UseVisualStyleBackColor = true;
 			this->btn_back->Click += gcnew System::EventHandler(this, &form_lab_3::btn_back_Click);
 			// 
+			// btn_sqlitewrite
+			// 
+			this->btn_sqlitewrite->Location = System::Drawing::Point(879, 1022);
+			this->btn_sqlitewrite->Name = L"btn_sqlitewrite";
+			this->btn_sqlitewrite->Size = System::Drawing::Size(76, 23);
+			this->btn_sqlitewrite->TabIndex = 84;
+			this->btn_sqlitewrite->Text = L"SQLite";
+			this->btn_sqlitewrite->UseVisualStyleBackColor = true;
+			this->btn_sqlitewrite->Click += gcnew System::EventHandler(this, &form_lab_3::btn_dbwrite_Click);
+			// 
+			// btn_excelwrite
+			// 
+			this->btn_excelwrite->Location = System::Drawing::Point(798, 1022);
+			this->btn_excelwrite->Name = L"btn_excelwrite";
+			this->btn_excelwrite->Size = System::Drawing::Size(75, 23);
+			this->btn_excelwrite->TabIndex = 83;
+			this->btn_excelwrite->Text = L"Excel";
+			this->btn_excelwrite->UseVisualStyleBackColor = true;
+			this->btn_excelwrite->Click += gcnew System::EventHandler(this, &form_lab_3::btn_dbwrite_Click);
+			// 
+			// label24
+			// 
+			this->label24->AutoSize = true;
+			this->label24->Location = System::Drawing::Point(646, 1027);
+			this->label24->Name = L"label24";
+			this->label24->Size = System::Drawing::Size(64, 13);
+			this->label24->TabIndex = 82;
+			this->label24->Text = L"Записать в";
+			// 
+			// btn_wordwrite
+			// 
+			this->btn_wordwrite->Location = System::Drawing::Point(716, 1022);
+			this->btn_wordwrite->Name = L"btn_wordwrite";
+			this->btn_wordwrite->Size = System::Drawing::Size(76, 23);
+			this->btn_wordwrite->TabIndex = 81;
+			this->btn_wordwrite->Text = L"Word";
+			this->btn_wordwrite->UseVisualStyleBackColor = true;
+			this->btn_wordwrite->Click += gcnew System::EventHandler(this, &form_lab_3::btn_dbwrite_Click);
+			// 
+			// btn_generateall
+			// 
+			this->btn_generateall->Location = System::Drawing::Point(306, 1022);
+			this->btn_generateall->Name = L"btn_generateall";
+			this->btn_generateall->Size = System::Drawing::Size(140, 23);
+			this->btn_generateall->TabIndex = 85;
+			this->btn_generateall->Text = L"Сгенерировать все";
+			this->btn_generateall->UseVisualStyleBackColor = true;
+			this->btn_generateall->Click += gcnew System::EventHandler(this, &form_lab_3::btn_generateall_Click);
+			// 
+			// btn_solveall
+			// 
+			this->btn_solveall->Location = System::Drawing::Point(538, 1022);
+			this->btn_solveall->Name = L"btn_solveall";
+			this->btn_solveall->Size = System::Drawing::Size(97, 23);
+			this->btn_solveall->TabIndex = 86;
+			this->btn_solveall->Text = L"Обработать все";
+			this->btn_solveall->UseVisualStyleBackColor = true;
+			this->btn_solveall->Click += gcnew System::EventHandler(this, &form_lab_3::btn_solveall_Click);
+			// 
 			// form_lab_3
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(988, 1057);
+			this->Controls->Add(this->btn_solveall);
+			this->Controls->Add(this->btn_generateall);
+			this->Controls->Add(this->btn_sqlitewrite);
+			this->Controls->Add(this->btn_excelwrite);
+			this->Controls->Add(this->label24);
+			this->Controls->Add(this->btn_wordwrite);
 			this->Controls->Add(this->btn_back);
 			this->Controls->Add(this->label20);
 			this->Controls->Add(this->dg_13result);
@@ -916,7 +996,7 @@ private: System::Windows::Forms::Button^ btn_back;
 			this->Controls->Add(this->label7);
 			this->Controls->Add(this->tb_7resind);
 			this->Controls->Add(this->label8);
-			this->Controls->Add(this->tb_7generate);
+			this->Controls->Add(this->btn_7generate);
 			this->Controls->Add(this->tb_7arraylen);
 			this->Controls->Add(this->label9);
 			this->Controls->Add(this->btn_7solve);
@@ -1006,7 +1086,7 @@ private: System::Windows::Forms::Button^ btn_back;
 			tb_4answer->BackColor = System::Drawing::Color::Pink;
 		}
 	}
-	private: System::Void tb_7generate_Click(System::Object^ sender, System::EventArgs^ e) {
+	private: System::Void btn_7generate_Click(System::Object^ sender, System::EventArgs^ e) {
 		generate(tb_7arraylen, dg_7start, btn_7solve);
 	}
 	private: System::Void btn_7solve_Click(System::Object^ sender, System::EventArgs^ e) {
@@ -1050,7 +1130,7 @@ private: System::Windows::Forms::Button^ btn_back;
 	private: System::Void btn_10generate_Click(System::Object^ sender, System::EventArgs^ e) {
 		generate(tb_10arraylen, dg_10start, btn_10sort);
 	}
-	private: System::Void vtn_10sort_Click(System::Object^ sender, System::EventArgs^ e) {
+	private: System::Void btn_10sort_Click(System::Object^ sender, System::EventArgs^ e) {
 		int arraylen = LabsDLL::FunctsForAll::Vvod(tb_10arraylen);
 		int* array = new int[arraylen] {};
 		LabsDLL::FunctsForAll::input_mas(array, arraylen, dg_10start);
@@ -1090,6 +1170,140 @@ private: System::Windows::Forms::Button^ btn_back;
 	private: System::Void btn_back_Click(System::Object^ sender, System::EventArgs^ e) {
 		Owner->Show();
 		this->Close();
+	}
+
+	private: System::Void btn_dbwrite_Click(System::Object^ sender, System::EventArgs^ e) {
+		int al_3 = LabsDLL::FunctsForAll::Vvod(tb_3arraylen);
+		int al_4 = LabsDLL::FunctsForAll::Vvod(tb_4arraylen);
+		int al_7 = LabsDLL::FunctsForAll::Vvod(tb_7arraylen);
+		int al_8 = LabsDLL::FunctsForAll::Vvod(tb_8arraylen);
+		int al_10 = LabsDLL::FunctsForAll::Vvod(tb_10arraylen);
+		int al_11 = LabsDLL::FunctsForAll::Vvod(tb_11arraylen);
+		int al_12 = LabsDLL::FunctsForAll::Vvod(tb_12arraylen);
+		int al_13 = LabsDLL::FunctsForAll::Vvod(tb_13arraylen);
+
+		int* ar_3 = new int[al_3] {};
+		int* ar_4 = new int[al_4] {};
+		int* ar_7 = new int[al_7] {};
+		int* ar_8 = new int[al_8] {};
+		int* ar_10 = new int[al_10] {};
+		int* ar_11 = new int[al_11] {};
+		int* ar_12 = new int[al_12] {};
+		int* ar_13 = new int[al_13] {};
+
+		LabsDLL::FunctsForAll::input_mas(ar_3, al_3, dg_3start);
+		LabsDLL::FunctsForAll::input_mas(ar_4, al_4, dg_4start);
+		LabsDLL::FunctsForAll::input_mas(ar_7, al_7, dg_7start);
+		LabsDLL::FunctsForAll::input_mas(ar_8, al_8, dg_8start);
+		LabsDLL::FunctsForAll::input_mas(ar_10, al_10, dg_10start);
+		LabsDLL::FunctsForAll::input_mas(ar_11, al_11, dg_11start);
+		LabsDLL::FunctsForAll::input_mas(ar_12, al_12, dg_12start);
+		LabsDLL::FunctsForAll::input_mas(ar_13, al_13, dg_13start);
+
+		int* answ_3 = new int[al_3 + 1]{};
+		LabsDLL::FunctsForAll::input_mas(answ_3, al_3, dg_3result);
+		String^ answ_4 = tb_4answer->Text;
+		String^ answ_7 = tb_7resval->Text;
+		String^ answ_8 = tb_8resind->Text;
+		int* answ_10 = new int[al_10] {};
+		LabsDLL::FunctsForAll::input_mas(answ_10, al_10, dg_10result);
+		int* answ_11 = new int[al_11] {};
+		LabsDLL::FunctsForAll::input_mas(answ_11, al_11, dg_11result);
+		int* answ_12 = new int[al_12] {};
+		LabsDLL::FunctsForAll::input_mas(answ_12, al_12, dg_12result);
+		int* answ_13 = new int[al_13] {};
+		LabsDLL::FunctsForAll::input_mas(answ_13, al_13, dg_13result);
+
+		if (sender == btn_wordwrite) {
+			auto Wrd = LabsDLL::FunctsForAll::CreateWordDoc();
+			LabsDLL::FunctsForAll::ZapisWordOneArr("Задание 3, исходный массив", ar_3, al_3, Wrd);
+			LabsDLL::FunctsForAll::ZapisWordOneArr("Задание 3, ответ", answ_3, al_3 + 1, Wrd);
+			LabsDLL::FunctsForAll::ZapisWordOneArr("Задание 4, исходный массив", ar_4, al_4, Wrd);
+			LabsDLL::FunctsForAll::ZapisWordValue("Задание 4, ответ", answ_4, Wrd);
+			LabsDLL::FunctsForAll::ZapisWordOneArr("Задание 7, исходный массив", ar_7, al_7, Wrd);
+			LabsDLL::FunctsForAll::ZapisWordValue("Задание 7, ответ", answ_7, Wrd);
+			LabsDLL::FunctsForAll::ZapisWordOneArr("Задание 8, исходный массив", ar_8, al_8, Wrd);
+			LabsDLL::FunctsForAll::ZapisWordValue("Задание 8, ответ", answ_8, Wrd);
+			LabsDLL::FunctsForAll::ZapisWordOneArr("Задание 10, исходный массив", ar_10, al_10, Wrd);
+			LabsDLL::FunctsForAll::ZapisWordOneArr("Задание 10, ответ", answ_10, al_10, Wrd);
+			LabsDLL::FunctsForAll::ZapisWordOneArr("Задание 11, исходный массив", ar_11, al_11, Wrd);
+			LabsDLL::FunctsForAll::ZapisWordOneArr("Задание 11, ответ", answ_11, al_11, Wrd);
+			LabsDLL::FunctsForAll::ZapisWordOneArr("Задание 12, исходный массив", ar_12, al_12, Wrd);
+			LabsDLL::FunctsForAll::ZapisWordOneArr("Задание 12, ответ", answ_12, al_12, Wrd);
+			LabsDLL::FunctsForAll::ZapisWordOneArr("Задание 13, исходный массив", ar_13, al_13, Wrd);
+			LabsDLL::FunctsForAll::ZapisWordOneArr("Задание 13, ответ", answ_13, al_13, Wrd);
+		}
+		else if (sender == btn_excelwrite) {
+			auto XL = LabsDLL::FunctsForAll::CreateExcelDoc();
+			LabsDLL::FunctsForAll::ZapisExcelOneArr("Задание 3, исходный массив", ar_3, al_3, XL);
+			LabsDLL::FunctsForAll::ZapisExcelOneArr("Задание 3, ответ", answ_3, al_3 + 1, XL);
+			LabsDLL::FunctsForAll::ZapisExcelOneArr("Задание 4, исходный массив", ar_4, al_4, XL);
+			LabsDLL::FunctsForAll::ZapisExcelValue("Задание 4, ответ", answ_4, XL);
+			LabsDLL::FunctsForAll::ZapisExcelOneArr("Задание 7, исходный массив", ar_7, al_7, XL);
+			LabsDLL::FunctsForAll::ZapisExcelValue("Задание 7, ответ", answ_7, XL);
+			LabsDLL::FunctsForAll::ZapisExcelOneArr("Задание 8, исходный массив", ar_8, al_8, XL);
+			LabsDLL::FunctsForAll::ZapisExcelValue("Задание 8, ответ", answ_8, XL);
+			LabsDLL::FunctsForAll::ZapisExcelOneArr("Задание 10, исходный массив", ar_10, al_10, XL);
+			LabsDLL::FunctsForAll::ZapisExcelOneArr("Задание 10, ответ", answ_10, al_10, XL);
+			LabsDLL::FunctsForAll::ZapisExcelOneArr("Задание 11, исходный массив", ar_11, al_11, XL);
+			LabsDLL::FunctsForAll::ZapisExcelOneArr("Задание 11, ответ", answ_11, al_11, XL);
+			LabsDLL::FunctsForAll::ZapisExcelOneArr("Задание 12, исходный массив", ar_12, al_12, XL);
+			LabsDLL::FunctsForAll::ZapisExcelOneArr("Задание 12, ответ", answ_12, al_12, XL);
+			LabsDLL::FunctsForAll::ZapisExcelOneArr("Задание 13, исходный массив", ar_13, al_13, XL);
+			LabsDLL::FunctsForAll::ZapisExcelOneArr("Задание 13, ответ", answ_13, al_13, XL);
+
+		}
+		else if (sender == btn_sqlitewrite) {
+			LabsDLL::FunctsForAll::add();
+			array<String^>^ names = gcnew array<String^> {"Start array", "Answer"};
+			array<String^>^ tablenames = gcnew array<String^> {
+				"Task 3", "Task 4", "Task 7", "Task 8", "Task 10", "Task 11", "Task 12", "Task 13",
+			};
+			for (int i = 0; i < 8; i++) {
+				LabsDLL::FunctsForAll::add_struct(names, 2, tablenames[i]);
+			}
+			MessageBox::Show("Структура базы данных записана");
+			LabsDLL::FunctsForAll::add_zap(names[0], ar_3, al_3, tablenames[0]);
+			LabsDLL::FunctsForAll::add_zap(names[1], answ_3, al_3 + 1, tablenames[0]);
+			LabsDLL::FunctsForAll::add_zap(names[0], ar_4, al_4, tablenames[1]);
+			LabsDLL::FunctsForAll::add_zap(names[1], answ_4, tablenames[1]);
+			LabsDLL::FunctsForAll::add_zap(names[0], ar_7, al_7, tablenames[2]);
+			LabsDLL::FunctsForAll::add_zap(names[1], answ_7, tablenames[2]);
+			LabsDLL::FunctsForAll::add_zap(names[0], ar_8, al_8, tablenames[3]);
+			LabsDLL::FunctsForAll::add_zap(names[1], answ_8, tablenames[3]);
+			LabsDLL::FunctsForAll::add_zap(names[0], ar_10, al_10, tablenames[4]);
+			LabsDLL::FunctsForAll::add_zap(names[1], answ_10, al_10, tablenames[4]);
+			LabsDLL::FunctsForAll::add_zap(names[0], ar_11, al_11, tablenames[5]);
+			LabsDLL::FunctsForAll::add_zap(names[1], answ_11, al_11, tablenames[5]);
+			LabsDLL::FunctsForAll::add_zap(names[0], ar_12, al_12, tablenames[6]);
+			LabsDLL::FunctsForAll::add_zap(names[1], answ_12, al_12, tablenames[6]);
+			LabsDLL::FunctsForAll::add_zap(names[0], ar_13, al_13, tablenames[7]);
+			LabsDLL::FunctsForAll::add_zap(names[1], answ_13, al_13, tablenames[7]);
+			MessageBox::Show("Все записи добавлены");
+
+		}
+	}
+
+	private: System::Void btn_generateall_Click(System::Object^ sender, System::EventArgs^ e) {
+		btn_3generate_Click(sender, e);
+		btn_4generate_Click(sender, e);
+		btn_7generate_Click(sender, e);
+		btn_8generate_Click(sender, e);
+		btn_10generate_Click(sender, e);
+		btn_11generate_Click(sender, e);
+		btn_12generate_Click(sender, e);
+		btn_13generate_Click(sender, e);
+	}
+	private: System::Void btn_solveall_Click(System::Object^ sender, System::EventArgs^ e) {
+		btn_3insert_Click(sender, e);
+		btn_4solve_Click(sender, e);
+		btn_7solve_Click(sender, e);
+		btn_8solve_Click(sender, e);
+		btn_10sort_Click(sender, e);
+		btn_11sort_Click(sender, e);
+		btn_12sort_Click(sender, e);
+		btn_13sort_Click(sender, e);
+
 	}
 };
 }
