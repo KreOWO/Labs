@@ -112,24 +112,16 @@ def save_to_word(filename, text, value):
     doc.save(filename)
 
 
-def connect_sqlite(filename):
-    """
-    подкючение к SQLite таблице
-    :param filename: имя файла
-    :return: объект коннектора
-    """
-    connector = sqlite3.connect(filename)
-    connector.cursor().execute("CREATE TABLE IF NOT EXISTS results (id INTEGER PRIMARY KEY AUTOINCREMENT)")
-    return connector
-
-
-def save_to_sqlite(connector, name, value):
+def save_to_sqlite(filename, name, value):
     """
     Сохраняет данные в таблицу sql
-    :param connector: объект коннектора
+    :param filename: имя файла
     :param name: название столбца
     :param value: данные
     """
+
+    connector = sqlite3.connect(filename)
+    connector.cursor().execute("CREATE TABLE IF NOT EXISTS results (id INTEGER PRIMARY KEY AUTOINCREMENT)")
     cursor = connector.cursor()
 
     cursor.execute(f"PRAGMA table_info(results)")
@@ -140,7 +132,6 @@ def save_to_sqlite(connector, name, value):
     cursor.execute("SELECT COUNT(*) FROM results")
     row_count = cursor.fetchone()[0]
 
-    # Если значение - список, обновляем каждую строку
     if isinstance(value, list):
         for i in range(min(row_count, len(value))):
             cursor.execute(f"UPDATE results SET {name} = {value[i]} WHERE rowid = {i + 1}")
